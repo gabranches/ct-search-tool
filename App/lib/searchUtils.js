@@ -20,7 +20,7 @@ var wn = wordNet('../data/wordnet.db');
  * 
  */
 
-function propertyCheck(currentObject, query, ref, matches, index) {
+function propertyCheck(currentObject, queryArr, ref, matches, index) {
         
     var currentVal = ref.getVal(currentObject);
     
@@ -31,8 +31,10 @@ function propertyCheck(currentObject, query, ref, matches, index) {
         if (typeof currentVal === "string") {
             
             // Perform search and add to array
-            if (currentVal.indexOf(query) !== -1) {
-                matches.push(index);
+            if (findMatch(queryArr, currentVal)) {
+                if(matches.indexOf(index) === -1) {
+                    matches.push(index);
+                }
                 return true;
             }
             
@@ -47,14 +49,25 @@ function propertyCheck(currentObject, query, ref, matches, index) {
                     }
                     
                     // Perform search and add to array
-                    if (currentVal[i].indexOf(query) !== -1) {
-                        matches.push(index);
+                    if (findMatch(queryArr, currentVal[i])) {
+                        if(matches.indexOf(index) === -1) {
+                            matches.push(index);
+                        }
                         return true;
                     }
                     
                 }
                 
             }
+        }
+    }
+    return false;
+}
+
+function findMatch(needleArr, haystack) {
+    for (var i = 0; i < needleArr.length; i++) {
+        if (haystack.indexOf(needleArr[i]) !== -1) {
+            return true
         }
     }
     return false;
@@ -98,7 +111,7 @@ var self = module.exports = {
      *                          If no array is passed, the function returns an array
      */  
     
-    search: function(objectArr, query, propertyArr, matches) {
+    search: function(objectArr, queryArr, propertyArr, matches) {
         
         var returnFlag = false;
         
@@ -117,7 +130,7 @@ var self = module.exports = {
                 if (propertyArr.hasOwnProperty(j)) {
                     var property = propertyArr[j];
                     
-                    if (propertyCheck(obj, query, new StringRef(property), matches, i)) {
+                    if (propertyCheck(obj, queryArr, new StringRef(property), matches, i)) {
                         break;
                     }
                 }
