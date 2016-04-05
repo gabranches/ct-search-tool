@@ -3,11 +3,12 @@ var xml2js = require('xml2js');
 var StringRef = require('./StringRef');
 var wordNet = require('wordnet-magic');
 var util = require('util');
-
 var wn = wordNet('../data/wordnet.db');
 
-/* PRIVATE */
 
+/*** PRIVATE ***/
+
+        
 /**
  * Check if property exists and performs search.
  * If property value is an array, iterate over them and perform search.
@@ -18,9 +19,9 @@ var wn = wordNet('../data/wordnet.db');
  * @param {Array} matches - An array with existing matches
  * @param {Integer} index - The current index
  */
-
+   
 function propertyCheck(currentObject, queryArr, ref, matches, index) {
-        
+   
     var currentVal = ref.getVal(currentObject);
     
     // Check if property exists
@@ -61,6 +62,7 @@ function propertyCheck(currentObject, queryArr, ref, matches, index) {
     return false;
 }
 
+
 /**
  * Iterates over search terms and returns true once one is found
  * 
@@ -69,6 +71,7 @@ function propertyCheck(currentObject, queryArr, ref, matches, index) {
  */
 
 function findMatch(needleArr, haystack) {
+
     for (var i = 0; i < needleArr.length; i++) {
         if (haystack.indexOf(needleArr[i]) !== -1) {
             return true
@@ -78,13 +81,11 @@ function findMatch(needleArr, haystack) {
 }
 
     
-/* PUBLIC */
+/*** PUBLIC ***/
+
 
 var self = module.exports = {
     
-    
-    search: function(objectArr, queryArr, propertyArr, matches) {
-        
     /** 
      * Searches an array of objects, looks at the properties specified in propertyArr
      * Returns an array with the indices of matches
@@ -96,6 +97,7 @@ var self = module.exports = {
      *                          If no array is passed, the function returns an array
      */  
         
+    search: function(objectArr, queryArr, propertyArr, matches) {
         var returnFlag = false;
         
         // Initialize matches if not passed in
@@ -127,8 +129,6 @@ var self = module.exports = {
     },
     
     
-    getResults: function(objectArr, indexArray, propsToSave) {
-    
     /** 
      * Returns an object array with all matches and desired properties
      *
@@ -137,6 +137,7 @@ var self = module.exports = {
      * @param {Object} propsToSave - The properties to be saved
      */  
     
+    getResults: function(objectArr, indexArray, propsToSave) {
         var results = [];
         
         indexArray.forEach(function(index) {
@@ -151,7 +152,6 @@ var self = module.exports = {
     },
     
     
-    getSynonyms: function(word, callback) {
     
     /**
      * Returns an array of synonyms for a word (inclusive) using wordnet
@@ -160,7 +160,7 @@ var self = module.exports = {
      * @param {function} callback - A callback function
      */
     
-        // Initialize matches array
+    getSynonyms: function(word, callback) {
         var matches = [word];
         
         wn.isNoun(word, function(err, data){
@@ -191,8 +191,6 @@ var self = module.exports = {
     },
     
     
-    xmlToJson: function(filepath, callback) {
-    
     /**
      * Coverts an XML file to JSON
      * 
@@ -200,6 +198,7 @@ var self = module.exports = {
      * @params {function} callback - A callback function
      */
     
+    xmlToJson: function(filepath, callback) {
         var parser = new xml2js.Parser();
         // Read xml file
         fs.readFile(filepath, function(err, data) {
@@ -212,8 +211,6 @@ var self = module.exports = {
     },
     
     
-    saveFile: function(filepath, data) {
-    
     /**
      * Saves a file to the file system
      * 
@@ -221,6 +218,7 @@ var self = module.exports = {
      * @params {function} callback - A callback function
      */
     
+    saveFile: function(filepath, data) {
         fs.writeFile(filepath, data, function(err) {
             if (err) throw err;
             console.log('Saved ' + filepath);

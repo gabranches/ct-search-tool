@@ -1,4 +1,4 @@
-var searchUtils = require('../lib/searchUtils');
+var searchUtils = require('../lib/search-utils');
 var data = require('../data/output.json');
 var fs = require('fs');
 
