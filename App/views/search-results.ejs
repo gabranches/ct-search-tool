@@ -1,0 +1,107 @@
+<% include header %>
+
+<!--banner-->
+    <div class="row banner">
+        <div class="small-6 large-2 columns"><img src="http://placehold.it/200x100"></div>
+        <div class="small-6 large-offset-8 large-2 columns text-right"><img src="http://placehold.it/200x100"></div>
+    </div>
+<!--end banner-->
+
+
+    <div class="row results-page">
+        
+
+       <div class="off-canvas-wrapper">
+       <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+       
+       
+     <!--filters-->  
+        <aside class="off-canvas position-left reveal-for-large" id="offCanvas" data-off-canvas>
+        <label><h4 class="underline">Sort by</h4>
+        <select>
+          <option value="relevance">Relevance</option>
+          <option value="n-to-o">Newest to oldest</option>
+          <option value="o-to-n">Oldest to newset</option>
+          <option value="alpha">Alphabetical</option>
+          <option value="p1">Phase 1</option>
+          <option value="p2">Phase 2</option>
+          <option value="p3">Phase 3</option>
+          <option value="p4">Phase 4</option>
+        </select>
+      </label>
+       <small><a class="float-right small" id="uncheck">Clear all</a></small>
+       <h4 class="underline">Eligibility Filters</h4> 
+       
+       <fieldset class="fieldset">
+        <legend>Gender</legend>
+        <input id="female" type="checkbox" checked><label for="female">Female</label><br>
+        <input id="male" type="checkbox" checked><label for="male">Male</label><br>
+      </fieldset>
+       <fieldset class="fieldset">
+        <legend>Age</legend>
+        <input id="under18" type="checkbox" checked><label for="under18">Children (age &lt; 18)</label><br>
+        <input id="over18" type="checkbox" checked><label for="over18">Adults (age &gt; 18)</label><br>
+      </fieldset>
+       <fieldset class="fieldset">
+        <legend>Volunteer Health</legend>
+        <input id="healthy" type="checkbox" checked><label for="healthy">Healthy</label><br>
+        <input id="prev-diag" type="checkbox" checked><label for="prev-diag">Previously Diagnosed</label><br>
+      </fieldset> 
+       <h4 class="underline">Trial filters</h4> 
+       <fieldset class="fieldset">
+        <legend>Phase</legend>
+        <input id="p1" type="checkbox" checked><label for="p1">Phase 1</label><br>
+        <input id="p2" type="checkbox" checked><label for="p2">Phase 2</label><br>
+        <input id="p3" type="checkbox" checked><label for="p3">Phase 3</label><br>
+        <input id="p4" type="checkbox" checked><label for="p4">Phase 4</label><br>
+      </fieldset>
+        </aside>
+<!--end filters-->
+        <div class="small-12 columns off-canvas-content" data-off-canvas-content>
+          <div class="row">
+                 <div class="small-12 columns underline">
+               <h4>127 clinical trials found for Multiple Melanoma</h4>
+           </div>
+          </div>
+          
+           <div class="row">
+               <div class="small-9 columns">
+               <button type="button" class="button button-filter hide-for-large" data-toggle="offCanvas"><i class="fa fa-filter"></i> filters</button>
+
+            <fieldset  class="fieldset">
+               <legend>Search:</legend>
+                <div class="input-group">
+            <input class="input-group-field" id="search-box" type="text" placeholder="Search by condition, treatment, sponsor or keywords">
+            
+        <div class="input-group-button">
+          <input type="submit" class="button" value="Submit">
+        </div>
+      </div>
+           <h4 class="underline">Related searches</h4>
+           <a>Hereditary Melanoma</a> | <a>Melanoma Cancer</a> | <a>Multiple Melanoma</a>
+            </fieldset>
+       </div>
+       </div>
+       <div class="row  ct">
+       <div class="small-12 medium-9 columns underline">
+           <h3><span class="phase">Phase 1:</span>Vaccine Therapy in Treating Patients With Metastatic Solid Tumors</h3>
+           <p class="crop">This phase I trial studies the side effects and best dose of vaccine therapy in treating patients with metastatic solid tumors. Vaccines made from antibodies and peptides combined with tumor cells may help the body build an effective immune response to kill tumor cells.</p>
+           <fieldset class="fieldset">
+               <legend>Keywords</legend>
+                <a>Metastatic Cancer</a>, <a>Metastasis</a>, <a>Neuroimmunotherapy</a> 
+           </fieldset>
+              <a href="details.html" class="button float-right">Read More</a>
+               <small><strong>Last updated:</strong> January 15, 2015</small>
+       </div>
+    </div>
+           </div>
+   
+           <a class="exit-off-canvas"></a>
+
+  </div>
+</div>
+
+
+</div>
+           
+<% include footer %>
