@@ -13,11 +13,10 @@ var wn = wordNet('../data/wordnet.db');
  * If property value is an array, iterate over them and perform search.
  * 
  * @param {Object} currentObject - The object being considered
- * @param {string} query - The search string
+ * @param {Array} queryArr - An array of search strings
  * @param {StringRef} ref - A StringRef of the property being checked
  * @param {Array} matches - An array with existing matches
  * @param {Integer} index - The current index
- * 
  */
 
 function propertyCheck(currentObject, queryArr, ref, matches, index) {
@@ -55,14 +54,19 @@ function propertyCheck(currentObject, queryArr, ref, matches, index) {
                         }
                         return true;
                     }
-                    
                 }
-                
             }
         }
     }
     return false;
 }
+
+/**
+ * Iterates over search terms and returns true once one is found
+ * 
+ * @params {Array} needleArr - An array of search strings
+ * @params {string} haystack - The text to be searched
+ */
 
 function findMatch(needleArr, haystack) {
     for (var i = 0; i < needleArr.length; i++) {
@@ -78,40 +82,19 @@ function findMatch(needleArr, haystack) {
 
 var self = module.exports = {
     
-    // Converts xml to json
-    xmlToJson: function(filepath, callback) {
-        var parser = new xml2js.Parser();
-        // Read xml file
-        fs.readFile(filepath, function(err, data) {
-            if (err) throw err;
-            // Convert to json
-            parser.parseString(data, function(err, result) {
-                callback(result);
-            });
-        });
-    },
     
-    // Saves a file
-    saveFile: function(filepath, data) {
-        fs.writeFile(filepath, data, function(err) {
-            if (err) throw err;
-            console.log('Saved ' + filepath);
-        });
-    },
-    
-    
+    search: function(objectArr, queryArr, propertyArr, matches) {
+        
     /** 
      * Searches an array of objects, looks at the properties specified in propertyArr
      * Returns an array with the indices of matches
      *
      * @param {Array} object Arr - The data to be considered
-     * @param {string} query - The query string
+     * @param {Array} queryArr - An array of search strings
      * @param {Array} propertyArr - A list of properties to be searched
      * @param {Array} matches - (Optional) An array with pre-existing matches
      *                          If no array is passed, the function returns an array
      */  
-    
-    search: function(objectArr, queryArr, propertyArr, matches) {
         
         var returnFlag = false;
         
@@ -144,6 +127,8 @@ var self = module.exports = {
     },
     
     
+    getResults: function(objectArr, indexArray, propsToSave) {
+    
     /** 
      * Returns an object array with all matches and desired properties
      *
@@ -152,7 +137,6 @@ var self = module.exports = {
      * @param {Object} propsToSave - The properties to be saved
      */  
     
-    getResults: function(objectArr, indexArray, propsToSave) {
         var results = [];
         
         indexArray.forEach(function(index) {
@@ -166,6 +150,9 @@ var self = module.exports = {
         return results;
     },
     
+    
+    getSynonyms: function(word, callback) {
+    
     /**
      * Returns an array of synonyms for a word (inclusive) using wordnet
      * 
@@ -173,7 +160,6 @@ var self = module.exports = {
      * @param {function} callback - A callback function
      */
     
-    getSynonyms: function(word, callback) {
         // Initialize matches array
         var matches = [word];
         
@@ -201,6 +187,43 @@ var self = module.exports = {
                     callback(matches);
                 });
             });
+        });
+    },
+    
+    
+    xmlToJson: function(filepath, callback) {
+    
+    /**
+     * Coverts an XML file to JSON
+     * 
+     * @params {string} filepath - The location of the xml file
+     * @params {function} callback - A callback function
+     */
+    
+        var parser = new xml2js.Parser();
+        // Read xml file
+        fs.readFile(filepath, function(err, data) {
+            if (err) throw err;
+            // Convert to json
+            parser.parseString(data, function(err, result) {
+                callback(result);
+            });
+        });
+    },
+    
+    
+    saveFile: function(filepath, data) {
+    
+    /**
+     * Saves a file to the file system
+     * 
+     * @params {string} filepath - The location of the xml file
+     * @params {function} callback - A callback function
+     */
+    
+        fs.writeFile(filepath, data, function(err) {
+            if (err) throw err;
+            console.log('Saved ' + filepath);
         });
     },
     
