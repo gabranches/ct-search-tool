@@ -1,5 +1,5 @@
 
-var utils = require('../lib/utils');
+var searchUtils = require('../lib/search-utils');
 
 module.exports = function(app, root) {
     

@@ -1,23 +1,22 @@
 var fs = require('fs');
 var xml2js = require('xml2js');
 var StringRef = require('./StringRef');
-var wordNet = require('wordnet-magic');
 var util = require('util');
-var wn = wordNet('../data/wordnet.db');
 
 
 /*** PRIVATE ***/
 
         
 /**
+ * propertyCheck
  * Check if property exists and performs search.
  * If property value is an array, iterate over them and perform search.
  * 
- * @param {Object} currentObject - The object being considered
- * @param {Array} queryArr - An array of search strings
- * @param {StringRef} ref - A StringRef of the property being checked
- * @param {Array} matches - An array with existing matches
- * @param {Integer} index - The current index
+ * @param {Object} currentObject    - The object being considered
+ * @param {Array} queryArr          - An array of search strings
+ * @param {StringRef} ref           - A StringRef of the property being checked
+ * @param {Array} matches           - An array with existing matches
+ * @param {Integer} index           - The current index
  */
    
 function propertyCheck(currentObject, queryArr, ref, matches, index) {
@@ -64,10 +63,11 @@ function propertyCheck(currentObject, queryArr, ref, matches, index) {
 
 
 /**
+ * findMatch
  * Iterates over search terms and returns true once one is found
  * 
- * @params {Array} needleArr - An array of search strings
- * @params {string} haystack - The text to be searched
+ * @params {Array} needleArr    - An array of search strings
+ * @params {string} haystack    - The text to be searched
  */
 
 function findMatch(needleArr, haystack) {
@@ -87,22 +87,23 @@ function findMatch(needleArr, haystack) {
 var self = module.exports = {
     
     /** 
+     * search
      * Searches an array of objects, looks at the properties specified in propertyArr
      * Returns an array with the indices of matches
      *
-     * @param {Array} object Arr - The data to be considered
-     * @param {Array} queryArr - An array of search strings
-     * @param {Array} propertyArr - A list of properties to be searched
-     * @param {Array} matches - (Optional) An array with pre-existing matches
-     *                          If no array is passed, the function returns an array
+     * @param {Array} object Arr    - The data to be considered
+     * @param {Array} queryArr      - An array of search strings
+     * @param {Array} propertyArr   - A list of properties to be searched
+     * @param {Array} matchesArr    - (Optional) An array with pre-existing matches
+     *                                If no array is passed, the function returns an array
      */  
         
-    search: function(objectArr, queryArr, propertyArr, matches) {
+    search: function(objectArr, queryArr, propertyArr, matchesArr) {
         var returnFlag = false;
         
         // Initialize matches if not passed in
-        if (!matches) {
-            matches = [];
+        if (!matchesArr) {
+            matchesArr = [];
             returnFlag = true;
         }
         
@@ -115,10 +116,11 @@ var self = module.exports = {
                 if (propertyArr.hasOwnProperty(j)) {
                     var property = propertyArr[j];
                     
-                    if (propertyCheck(obj, queryArr, new StringRef(property), matches, i)) {
+                    if (propertyCheck(obj, queryArr, new StringRef(property), matchesArr, i)) {
                         break;
                     }
                 }
+                
                 
             };
         }
@@ -127,14 +129,15 @@ var self = module.exports = {
             return matches;
         }
     },
-    
+   
     
     /** 
+     * getResults
      * Returns an object array with all matches and desired properties
      *
-     * @param {Array} objectArr - The data to be considered
-     * @param {Array} indexArr - An array of indices
-     * @param {Object} propsToSave - The properties to be saved
+     * @param {Array} objectArr     - The data to be considered
+     * @param {Array} indexArr      - An array of indices
+     * @param {Object} propsToSave  - The properties to be saved
      */  
     
     getResults: function(objectArr, indexArray, propsToSave) {
@@ -152,15 +155,17 @@ var self = module.exports = {
     },
     
     
-    
     /**
+     * getSynonyms
      * Returns an array of synonyms for a word (inclusive) using wordnet
-     * 
-     * @param {string} word - The word to look up
-     * @param {function} callback - A callback function
+     *  
+     * @param {string} word         - The word to look up
+     * @param {function} callback   - A callback function
      */
     
     getSynonyms: function(word, callback) {
+        var wordNet = require('wordnet-magic');
+        var wn = wordNet('../data/wordnet.db');
         var matches = [word];
         
         wn.isNoun(word, function(err, data){
@@ -172,7 +177,7 @@ var self = module.exports = {
             }
             
             // Get synset
-            wn.fetchSynset(word+".n.1", function(err, synset){
+            wn.fetchSynset(word + ".n.1", function(err, synset){
                 if (err) throw err;
                 
                 synset.getLemmas(function(err, data){ 
@@ -192,10 +197,11 @@ var self = module.exports = {
     
     
     /**
+     * xmlToJson
      * Coverts an XML file to JSON
      * 
-     * @params {string} filepath - The location of the xml file
-     * @params {function} callback - A callback function
+     * @params {string} filepath    - The location of the xml file
+     * @params {function} callback  - A callback function
      */
     
     xmlToJson: function(filepath, callback) {
@@ -212,10 +218,11 @@ var self = module.exports = {
     
     
     /**
+     * saveFile
      * Saves a file to the file system
      * 
-     * @params {string} filepath - The location of the xml file
-     * @params {function} callback - A callback function
+     * @params {string} filepath    - The location of the xml file
+     * @params {function} callback  - A callback function
      */
     
     saveFile: function(filepath, data) {
