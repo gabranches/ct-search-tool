@@ -1,0 +1,6 @@
+.DS_Store
+App/bower_components
+App/node_modules/
+App/npm-debug.log
+App/css
+App/data/wordnet.db
