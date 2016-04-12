@@ -25,6 +25,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.15.0",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
     "gulp-autoprefixer": "^3.1.0",

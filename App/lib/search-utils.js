@@ -8,7 +8,6 @@ var util = require('util');
 
         
 /**
- * propertyCheck
  * Check if property exists and performs search.
  * If property value is an array, iterate over them and perform search.
  * 
@@ -63,7 +62,6 @@ function propertyCheck(currentObject, queryArr, ref, matches, index) {
 
 
 /**
- * findMatch
  * Iterates over search terms and returns true once one is found
  * 
  * @params {Array} needleArr    - An array of search strings
@@ -87,7 +85,6 @@ function findMatch(needleArr, haystack) {
 var self = module.exports = {
     
     /** 
-     * search
      * Searches an array of objects, looks at the properties specified in propertyArr
      * Returns an array with the indices of matches
      *
@@ -126,13 +123,12 @@ var self = module.exports = {
         }
         // Return an array of matches if no matches were passed in
         if (returnFlag === true) {
-            return matches;
+            return matchesArr;
         }
     },
    
     
     /** 
-     * getResults
      * Returns an object array with all matches and desired properties
      *
      * @param {Array} objectArr     - The data to be considered
@@ -156,7 +152,6 @@ var self = module.exports = {
     
     
     /**
-     * getSynonyms
      * Returns an array of synonyms for a word (inclusive) using wordnet
      *  
      * @param {string} word         - The word to look up
@@ -165,7 +160,7 @@ var self = module.exports = {
     
     getSynonyms: function(word, callback) {
         var wordNet = require('wordnet-magic');
-        var wn = wordNet('../data/wordnet.db');
+        var wn = wordNet('./data/wordnet.db');
         var matches = [word];
         
         wn.isNoun(word, function(err, data){
@@ -197,7 +192,6 @@ var self = module.exports = {
     
     
     /**
-     * xmlToJson
      * Coverts an XML file to JSON
      * 
      * @params {string} filepath    - The location of the xml file
@@ -218,7 +212,6 @@ var self = module.exports = {
     
     
     /**
-     * saveFile
      * Saves a file to the file system
      * 
      * @params {string} filepath    - The location of the xml file
