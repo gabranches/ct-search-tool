@@ -16,17 +16,17 @@
 
      <!--filters-->  
      <aside class="off-canvas position-left reveal-for-large" id="offCanvas" data-off-canvas>
-         <label><h4 class="underline">Sort by</h4>
-            <select>
-              <option value="relevance">Relevance</option>
-              <option value="n-to-o">Newest to oldest</option>
-              <option value="o-to-n">Oldest to newset</option>
-              <option value="alpha">Alphabetical</option>
-              <option value="p1">Phase 1</option>
-              <option value="p2">Phase 2</option>
-              <option value="p3">Phase 3</option>
-              <option value="p4">Phase 4</option>
-          </select>
+       <label><h4 class="underline">Sort by</h4>
+        <select>
+          <option value="relevance">Relevance</option>
+          <option value="n-to-o">Newest to oldest</option>
+          <option value="o-to-n">Oldest to newset</option>
+          <option value="alpha">Alphabetical</option>
+          <option value="p1">Phase 1</option>
+          <option value="p2">Phase 2</option>
+          <option value="p3">Phase 3</option>
+          <option value="p4">Phase 4</option>
+        </select>
       </label>
       <small><a class="float-right small" id="uncheck">Clear all</a></small>
       <h4 class="underline">Eligibility Filters</h4> 
@@ -35,64 +35,65 @@
         <legend>Gender</legend>
         <input id="female" type="checkbox" checked><label for="female">Female</label><br>
         <input id="male" type="checkbox" checked><label for="male">Male</label><br>
-    </fieldset>
-    <fieldset class="fieldset">
+      </fieldset>
+      <fieldset class="fieldset">
         <legend>Age</legend>
         <input id="under18" type="checkbox" checked><label for="under18">Children (age &lt; 18)</label><br>
         <input id="over18" type="checkbox" checked><label for="over18">Adults (age &gt; 18)</label><br>
-    </fieldset>
-    <fieldset class="fieldset">
+      </fieldset>
+      <fieldset class="fieldset">
         <legend>Volunteer Health</legend>
         <input id="healthy" type="checkbox" checked><label for="healthy">Healthy</label><br>
         <input id="prev-diag" type="checkbox" checked><label for="prev-diag">Previously Diagnosed</label><br>
-    </fieldset> 
-    <h4 class="underline">Trial filters</h4> 
-    <fieldset class="fieldset">
+      </fieldset> 
+      <h4 class="underline">Trial filters</h4> 
+      <fieldset class="fieldset">
         <legend>Phase</legend>
-        <input id="p1" type="checkbox" checked><label for="p1">Phase 1</label><br>
-        <input id="p2" type="checkbox" checked><label for="p2">Phase 2</label><br>
-        <input id="p3" type="checkbox" checked><label for="p3">Phase 3</label><br>
-        <input id="p4" type="checkbox" checked><label for="p4">Phase 4</label><br>
-    </fieldset>
-</aside>
-<!--end filters-->
-<div class="small-12 columns off-canvas-content" data-off-canvas-content>
-  <div class="row">
-   <div class="small-12 columns underline">
-     <h4>{{ data.numMatches }} clinical trials found for {{ data.query }}</h4>
- </div>
-</div>
+        <input id="p1" type="checkbox" ng-model="filters.phases['Phase 1']" checked><label for="p1">Phase 1</label><br>
+        <input id="p2" type="checkbox" ng-model="filters.phases['Phase 2']" checked><label for="p2">Phase 2</label><br>
+        <input id="p3" type="checkbox" ng-model="filters.phases['Phase 3']" checked><label for="p3">Phase 3</label><br>
+        <input id="p4" type="checkbox" ng-model="filters.phases['Phase 4']" checked><label for="p4">Phase 4</label><br>
+        <input id="pn" type="checkbox" ng-model="filters.phases['N/A']" checked><label for="pu">N/A</label><br>
+      </fieldset>
+    </aside>
+    <!--end filters-->
+    <div class="small-12 columns off-canvas-content" data-off-canvas-content>
+      <div class="row">
+       <div class="small-12 columns underline">
+         <h4>{{ data.numMatches }} clinical trials found for {{ data.query }}</h4>
+       </div>
+     </div>
 
-<div class="row">
-   <div class="small-9 columns">
-     <button type="button" class="button button-filter hide-for-large" data-toggle="offCanvas"><i class="fa fa-filter"></i> filters</button>
+     <div class="row">
+       <div class="small-9 columns">
+         <button type="button" class="button button-filter hide-for-large" data-toggle="offCanvas"><i class="fa fa-filter"></i> filters</button>
 
-     <fieldset  class="fieldset">
-       <legend>Search:</legend>
-       <div class="input-group">
-        <input class="input-group-field" id="search-box" type="text" placeholder="Search by condition, treatment, sponsor or keywords">
+         <fieldset  class="fieldset">
+           <legend>Search:</legend>
+           <div class="input-group">
+            <input class="input-group-field" id="search-box" type="text" placeholder="Search by condition, treatment, sponsor or keywords">
 
-        <div class="input-group-button">
-          <input type="submit" class="button" value="Submit">
+            <div class="input-group-button">
+              <input type="submit" class="button" value="Submit">
+            </div>
+          </div>
+          <h4 class="underline">Related searches</h4>
+          <span ng-repeat="term in data.related" class="search-term"><a>{{ term }}</a></span>
+        </fieldset>
       </div>
+    </div>
+    <div class="row  ct" ng-repeat="study in data.results | filter: phaseFilter">
+     <div class="small-12 medium-9 columns underline">
+      <h3><span ng-if="study.phase != 'N/A'" class="phase">{{ study.phase }}: </span>{{ study.brief_title }}</h3>
+      <p class="crop"> {{ study.brief_summary }}</p>
+      <fieldset class="fieldset">
+        <legend>Keywords</legend>
+        <span class="keyword" ng-repeat="keyword in study.keywords"><a>{{ keyword }}</a></span>
+      </fieldset>
+      <a href="details.html" class="button float-right">Read More</a>
+      <small><strong>Last updated: </strong> {{ study.last_updated }}</small>
+    </div>
   </div>
-  <h4 class="underline">Related searches</h4>
-  <span ng-repeat="term in data.related" class="search-term"><a>{{ term }}</a></span>
-</fieldset>
-</div>
-</div>
-<div class="row  ct">
- <div class="small-12 medium-9 columns underline">
-   <h3><span class="phase">Phase 1:</span>Vaccine Therapy in Treating Patients With Metastatic Solid Tumors</h3>
-   <p class="crop">This phase I trial studies the side effects and best dose of vaccine therapy in treating patients with metastatic solid tumors. Vaccines made from antibodies and peptides combined with tumor cells may help the body build an effective immune response to kill tumor cells.</p>
-   <fieldset class="fieldset">
-     <legend>Keywords</legend>
-     <a>Metastatic Cancer</a>, <a>Metastasis</a>, <a>Neuroimmunotherapy</a> 
- </fieldset>
- <a href="details.html" class="button float-right">Read More</a>
- <small><strong>Last updated:</strong> January 15, 2015</small>
-</div>
-</div>
 </div>
 
 <a class="exit-off-canvas"></a>

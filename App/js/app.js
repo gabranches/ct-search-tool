@@ -53,3 +53,25 @@ $('#copy').click(function() {
     $('#email').prop('checked', true);
     $(".email-msg").show();
 });
+
+// Gustavo's code
+
+$('.input-group-button').click(function() {
+    var searchParam = encodeURIComponent($(this).parent().find('.input-group-field').val());
+    redirect('/search-results', '/' + searchParam);    
+});
+
+$('.search-term').click(function() {
+    console.log('click');
+    var searchParam = encodeURIComponent($(this).find('a').val());
+    redirect('/search-results', '/' + searchParam);    
+});
+
+function redirect(root, queryString) {
+    if (queryString.trim() != '') {
+        window.location = root + queryString;
+    }
+}
+
+
+

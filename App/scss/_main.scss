@@ -56,9 +56,6 @@ $screen: #efefef;
     margin-top: 5px;
 }
 
-.search-term {
-    margin-right:15px;
-}
 
 #details {
     background: $screen;
@@ -91,4 +88,14 @@ $screen: #efefef;
         margin: auto;
         display: block;
     }
+}
+
+// Gustavo's CSS
+
+.search-term {
+    margin-right: 15px;
+}
+
+.keyword {
+    margin-right: 15px;
 }
