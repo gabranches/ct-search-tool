@@ -45,7 +45,10 @@ module.exports = function(app, root) {
                     phase: 'phase.0',
                     brief_summary: 'brief_summary.0.textblock.0',
                     keywords: 'keyword',
-                    last_updated: 'lastchanged_date.0'
+                    last_updated: 'lastchanged_date.0',
+                    health: 'eligibility.0.healthy_volunteers.0',
+                    minimum_age: 'eligibility.0.minimum_age.0',
+                    maximum_age: 'eligibility.0.maximum_age.0'
                 }
             );
             
