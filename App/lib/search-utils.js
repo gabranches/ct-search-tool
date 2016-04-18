@@ -161,32 +161,28 @@ var self = module.exports = {
     getSynonyms: function(word, callback) {
         var wordNet = require('wordnet-magic');
         var wn = wordNet('./data/wordnet.db');
+
         var matches = [word];
-        
-        wn.isNoun(word, function(err, data){
+
+        var word = new wn.Word(word, 'n');
+     
+        // Get synset
+        word.getSynsets(function(err, data){
             if (err) throw err;
-            
-            // If word is not a noun, invoke callback immediately
-            if(!data) {
+
+            if(data.length === 0) {
+                // No matches
+                callback(matches);
+            } else {
+                data = data[0].words;
+                 // Add all lemmas to matches array
+                for (var j=0; j < data.length; j++) {
+                    if(matches.indexOf(data[j].lemma) === -1) {
+                        matches.push(data[j].lemma);
+                    }
+                }
                 callback(matches);
             }
-            
-            // Get synset
-            wn.fetchSynset(word + ".n.1", function(err, synset){
-                if (err) throw err;
-                
-                synset.getLemmas(function(err, data){ 
-                    if (err) throw err;
-                    
-                    // Add all lemmas to matches array
-                    for (var j=0; j < data.length; j++) {
-                        if(matches.indexOf(data[j].lemma) === -1) {
-                            matches.push(data[j].lemma);
-                        }
-                    }
-                    callback(matches);
-                });
-            });
         });
     },
     

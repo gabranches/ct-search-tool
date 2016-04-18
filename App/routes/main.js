@@ -22,10 +22,13 @@ module.exports = function(app, root) {
         var studies = data.studies.clinical_study;
         var query = decodeURIComponent(req.params.query);
         
-
         searchUtils.getSynonyms(query, function(synArr) {
 
+            console.log('Query: ' + query);
+            console.log('Synonyms: ' + synArr);
+            console.log('Getting matches...');
             var matches = searchUtils.search(studies, synArr,
+
                 // Enter below the fields in the JSON tree to be searched
                 [
                     'brief_title.0',
@@ -35,6 +38,7 @@ module.exports = function(app, root) {
                 ]
             );
             
+            console.log('Getting results...');
             var results = searchUtils.getResults(studies, matches, 
 
                 // Enter below the objects of interest in the JSON tree
@@ -48,11 +52,13 @@ module.exports = function(app, root) {
                     last_updated: 'lastchanged_date.0',
                     health: 'eligibility.0.healthy_volunteers.0',
                     minimum_age: 'eligibility.0.minimum_age.0',
-                    maximum_age: 'eligibility.0.maximum_age.0'
+                    maximum_age: 'eligibility.0.maximum_age.0',
+                    gender: 'eligibility.0.gender.0'
                 }
             );
             
             // Render the page and pass in data
+            console.log('Sending data...');
             res.render('search-results', {
                 data: {
                     query: query,

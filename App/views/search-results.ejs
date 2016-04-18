@@ -33,8 +33,9 @@
 
       <fieldset class="fieldset">
         <legend>Gender</legend>
-        <input id="female" type="checkbox" checked><label for="female">Female</label><br>
-        <input id="male" type="checkbox" checked><label for="male">Male</label><br>
+        <input id="both" type="radio" name="gender" ng-model="filters.gender" value="Both"><label for="both">All Studies</label><br>
+        <input id="female" type="radio" name="gender" ng-model="filters.gender" value="Female" ><label for="female">Female Participants</label><br>
+        <input id="male" type="radio" name="gender" ng-model="filters.gender" value="Male"><label for="male">Male Participants</label><br>
       </fieldset>
       <fieldset class="fieldset">
         <legend>Age</legend>
@@ -55,7 +56,7 @@
         <input id="p2" type="checkbox" ng-model="filters.phases['Phase 2']" checked><label for="p2">Phase 2</label><br>
         <input id="p3" type="checkbox" ng-model="filters.phases['Phase 3']" checked><label for="p3">Phase 3</label><br>
         <input id="p4" type="checkbox" ng-model="filters.phases['Phase 4']" checked><label for="p4">Phase 4</label><br>
-        <input id="pn" type="checkbox" ng-model="filters.phases['Not Specified']" checked><label for="pu">Not Specified</label><br>
+        <input id="pn" type="checkbox" ng-model="filters.phases['N/A']" checked><label for="pn">Not Specified</label><br>
       </fieldset>
     </aside>
     <!--end filters-->
@@ -84,11 +85,12 @@
         </fieldset>
       </div>
     </div>
-    <div class="row  ct" ng-repeat="study in data.results | filter: combinedFilter">
+    <h5>There are {{ filtered.length }} studies that match your eligibility filters.</h5>
+    <div class="row  ct" ng-repeat="study in data.results | filter: combinedFilter as filtered">
      <div class="small-12 medium-9 columns underline">
       <h3><span ng-if="study.phase != 'N/A'" class="phase">{{ study.phase }}: </span>{{ study.brief_title }}</h3>
       <p class="crop"> {{ study.brief_summary }}</p>
-      <fieldset class="fieldset">
+      <fieldset ng-show="study.keywords.length > 0" class="fieldset">
         <legend>Keywords</legend>
         <span class="keyword" ng-repeat="keyword in study.keywords"><a>{{ keyword }}</a></span>
       </fieldset>
