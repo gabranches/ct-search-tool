@@ -1,7 +1,8 @@
 
 var searchUtils = require('../lib/search-utils');
 var bodyParser = require('body-parser');
-
+var data = require('../data/output.json');
+var studies = data.studies.clinical_study;
 
 module.exports = function(app, root) {
 
@@ -11,15 +12,50 @@ module.exports = function(app, root) {
     app.get('/', function(req, res) {       
         res.render('index');
     });
-    
-    app.get('/details', function(req, res) {
-        res.render('details');
+
+    // ** DETAILS PAGE **//
+
+    app.get('/details/:nct', function(req, res) {
+
+        var nct = decodeURIComponent(req.params.nct);
+
+        var matches = searchUtils.search(studies, [nct],
+            [
+                'id_info.0.nct_id.0'
+            ]
+        );
+
+        var results = searchUtils.getResults(studies, matches, 
+
+            // Enter below the objects of interest in the JSON tree
+            { 
+                nct_id: 'id_info.0.nct_id.0',
+                url: 'required_header.0.url.0',
+                official_title: 'official_title.0',
+                phase: 'phase.0',
+                brief_summary: 'brief_summary.0.textblock.0',
+                healthy_volunteers: 'eligibility.0.healthy_volunteers.0',
+                gender: 'eligibility.0.gender.0',
+                inclusion_criteria: 'eligibility.0.criteria.0.textblock.0',
+                minimum_age: 'eligibility.0.minimum_age.0',
+                maximum_age: 'eligibility.0.maximum_age.0',
+                overall_officials: 'overall_official',
+                primary_outcome: 'primary_outcome',
+                secondary_outcome: 'secondary_outcome',
+                keywords: 'keyword',
+                contact: 'overall_contact.0'
+            }
+        );
+
+        res.render('details', {
+                data: results
+        });
+
     });
+
+    // ** SEARCH RESULTS PAGE ** //
     
     app.get('/search-results/:query', function(req, res) {
-
-        var data = require('../data/output.json');
-        var studies = data.studies.clinical_study;
         var query = decodeURIComponent(req.params.query);
         
         searchUtils.getSynonyms(query, function(synArr) {
@@ -34,8 +70,7 @@ module.exports = function(app, root) {
                     'brief_title.0',
                     'official_title.0', 
                     'detailed_description.0.textblock.0',
-                    'keyword'
-                ]
+                ]       
             );
             
             console.log('Getting results...');

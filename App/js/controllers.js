@@ -109,8 +109,23 @@ app.controller('SearchResultsController', ['$scope', function($scope) {
         return state;
     }
 
+
 }]);
 
+app.controller('DetailsController', ['$scope', '$sce', function($scope, $sce) {
+    $scope.data = data[0];
+
+    $scope.data.inclusion_criteria = $sce.trustAsHtml(unescape($scope.data.inclusion_criteria));
+
+    $scope.encodeURI = function(text) {
+        return encodeURIComponent(text);
+    }
+
+}]);
+
+function replaceNewlines(text) {
+    return text.replace('\n', '<br>');
+}
 
 // Converts an ageString to an integer representation of age
 // e.g. "18 Years" -> 18

@@ -94,7 +94,7 @@
         <legend>Keywords</legend>
         <span class="keyword" ng-repeat="keyword in study.keywords"><a>{{ keyword }}</a></span>
       </fieldset>
-      <a href="details.html" class="button float-right">Read More</a>
+      <a href="/details/{{ study.nct_id }}" class="button float-right">Read More</a>
       <small><strong>Last updated: </strong> {{ study.last_updated }}</small>
     </div>
   </div>

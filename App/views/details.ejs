@@ -8,102 +8,80 @@
 <!--end banner-->
 
 
-<div class="row details">
+<div class="row details" ng-controller="DetailsController">
       <div class="small-12 medium-9 columns">
-    <a href="search-results.html"><i class="fa fa-backward"></i> back to search results</a>
-    <h4><span class="phase">Phase 2:</span> Single-arm, Multicenter Trial to Determine the Efficacy and Safety of JCAR015 in Adult Subjects with Relapsed or Refractory B-Cell Acute Lymphoblastic Leukemia</h4>
+    <a href="/search-results"><i class="fa fa-backward"></i> back to search results</a>
+    <h4><span class="phase">{{ data.phase }}:</span> {{ data.official_title }}</h4>
     
-    <p>       
-This single-arm, multicenter Phase 2 trial will treat adult patients who have relapsed or refractory B-ALL with an infusion of the patient's own T cells that have been genetically modified to express a chimeric antigen receptor (CAR) that will bind to leukemia cells that express the CD19 protein on the cell surface. The study will determine if these modified T cells (called JCAR015) help the body's immune system eliminate leukemia cells. The trial will also study the safety of treatment with JCAR015, how long JCAR015 cells stay in the patient's body, the extent to which JCAR015 eliminates minimal residual disease, and the impact of this treatment on survival. 
-    </p>
+    <p>{{ data.brief_summary }}</p>
     <h4 class="underline">Eligibility</h4>
     <h5>Age</h5>
-    16 years or older
+    <p>Minimum: {{ data.minimum_age }} <br />
+    Maximum: {{ data.maximum_age }} </p>
     <h5>Gender</h5>
-    Both
+    <p>{{ data.gender }}</p>
     <h5>Accepting healthy volunteers</h5>
-    No
+    <p>{{ data.healthy_volunteers }}</p>
+
     <h5>Criteria</h5>
+    <p ng-bind-html="data.inclusion_criteria"></p>
     
-<ol>
-    <li>Age ≥ 18 years at the time of consent </li>
-    <li>Relapsed or refractory B-ALL, defined as:
-    <ul>
-       <li>First or greater bone marrow relapse from CR, or</li> 
-       <li>Any bone marrow relapse after allogeneic hematopoietic stem cell transplant 
-(HSCT); subjects must be at least 100 days from HSCT at the time of screening 
-and off immunosuppressant medication for at least 1 month at the time of 
-screening, and have no active graft-vs-host disease (GVHD), or </li>
-   <li>Refractory B-ALL, defined by not having achieved a CR or CRi after two attempts 
-at remission induction using standard chemotherapy regimens, or</li>
-   <li>Ph+ B-ALL if subjects are intolerant to or ineligible for tyrosine kinase 
-inhibitor (TKI) therapy, or have progressed after at least one line of TKI 
-therapy</li>
-    </ul></li>
-    <li>Morphological evidence of disease in bone marrow (at least 5% blasts)</li>
-    <li>Evidence of CD19 expression</li>
-    <li>Eastern Cooperative Oncology Group (ECOG) performance status between 0 and 2 at the time of screening</li>
-    <li>Adequate pulmonary, renal, hepatic, and cardiac function</li>
-    <li>Adequate central or peripheral vascular access for leukapheresis procedure</li>
-</ol>
    
     <h5 class="underline expand-header" id="details-headers">Details
 <!--    <small class="float-right "><a class="small" id="expand">Expand</a></small>-->
     <i class="fa fa-plus-circle float-right" id="details-icons"></i>
     </h5> 
     <section id="details">
-    <h5>Primary investigator</h5>
-    <p><a href="http://uhealthsystem.com/doctors/profile/3684">Krishna Komanduri</a></p>
-    <h5>Treatments</h5>
-    <p>JCAR015</p>
+    <h5>Overall Officials</h5>
+    <div ng-repeat="official in data.overall_officials">
+      <p>{{ official.last_name[0] }} ( {{ official.role[0] }} ) </p>
+    </div>
     <h5>Primary outcome measures</h5>
+    <ul ng-repeat="outcome in data.primary_outcome">
+      <li>{{ outcome.measure[0] }}
+      <ul>
+        <li>Time frame: {{ outcome.time_frame[0] }}
+        <li>Safety issue: {{ outcome.safety_issue[0] }}
+      </ul>
+    </ul>
 
-<ul>
-    <li>
-        Changes from baseline in number of participants with colorectal, breast, and/or cervical cancer screening [ Time Frame: 12 month ] [ Designated as safety issue: No ]
-        <ul>
-            <li>Chart Review: Review of electronic medical records at each of the three community health centers</li>
-            <li>Self-Report: We will ask participants about their participation (yes/no) in specific screening methods: Pap testing (past 3 years), mammography (past 2 years), and</li>
-            <li>colorectal screening (FOBT/FIT, past year; flexible sigmoidoscopy, the past 5 years; and colonoscopy, past 10 years).</li>
-        </ul>
-    </li>
-    <li>Change from Baseline in Patient Health Questionnaire (PHQ)-9 at 6 month [ Time Frame: 6 month ] [ Designated as safety issue: Yes ]</li>
-    <li>The PHQ-9 is the 9-item depression module from the full PHQ, and is a well-validated Diagnostic and Statistical Manual of Mental Disorders 4th Edition (DSM-IV) criterion-based measure for screening and diagnosing depressive episode, assessing severity, and monitoring treatment response, either in person or over the phone.</li>
-    <li>Change from Baseline in Patient Health Questionnaire (PHQ)-9 at 12 month [ Time Frame: 12 month ] [ Designated as safety issue: No ]</li>
-    <li>The PHQ-9 is the 9-item depression module from the full PHQ, and is a well-validated Diagnostic and Statistical Manual of Mental Disorders 4th Edition (DSM-IV) criterion-based measure for screening and diagnosing depressive episode, assessing severity, and monitoring treatment response, either in person or over the phone.</li>
-</ul>
+    <h5>Secondary outcome measures</h5>
+    <ul ng-repeat="outcome in data.secondary_outcome">
+      <li>{{ outcome.measure[0] }}
+      <ul>
+        <li>Time frame: {{ outcome.time_frame[0] }}
+        <li>Safety issue: {{ outcome.safety_issue[0] }}
+      </ul>
+    </ul>
+    
     
     </section>
-    <fieldset class="fieldset">
-        <legend>Keywords</legend>
-        <a href="#">Mental Disorders</a>, <a href="">Colorectal</a>, <a href="#">Bone Marrow</a>
+    <fieldset ng-show="data.keywords.length > 0" class="fieldset">
+      <legend>Keywords</legend>
+      <span class="keyword" ng-repeat="keyword in data.keywords"><a href="/search-results/{{ encodeURI(keyword) }}">{{ keyword }}</a></span>
     </fieldset>
   
      </div>  
       <div class="small-12 medium-3 columns">
-    <fieldset class="fieldset" id="contact">
+    <fieldset ng-show="data.contact.last_name.length > 0" class="fieldset" id="contact">
         <legend>Contact Information</legend>
-        Email or leave a message for the research coordinator to see if this trials is rigth for you. 
+        Email or leave a message for the research coordinator to see if this trials is right for you. 
         <ul>
-            <li>Ashley Motta</li>
-            <li>Call 305-284-6253</li>
-            <li><a href="mailto:amotta@miami.edu">amotta@miami.edu</a></li>
+            <li>{{ data.contact.last_name[0] }}</li>
+            <li>Call {{ data.contact.phone[0] }}</li>
+            <li><a href="mailto:{{ data.contact.email[0] }}">{{ data.contact.email[0] }}</a></li>
         </ul>
         <a href="#" class="button" data-open="send-msg"><i class="fa fa-envelope-o"></i> Send a message</a>
     </fieldset>
     </div>  
-
-
 </div>
-    
-    
-    <div class="reveal" id="send-msg" data-reveal>
+    <div class="reveal" id="send-msg" data-reveal ng-controller="DetailsController">
         <h3>Send a message</h3>
         <p>
-        to: <strong>Ashley Motta</strong>
+        to: <strong>{{ data.contact.last_name[0] }}</strong>
         </p>
         <p>Study:<br>
-        <span>Single-arm, Multicenter Trial to Determine the Efficacy and Safety of JCAR015 in Adult Subjects with Relapsed or Refractory B-Cell Acute Lymphoblastic Leukemia</span></p>
+        <span>{{ data.official_title }}</span></p>
         
             <div>
             <label>Your name*:
@@ -152,5 +130,9 @@ therapy</li>
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
+<script>
+  var data = <%- JSON.stringify(data) %>;
+</script>
 
 <% include footer %>
