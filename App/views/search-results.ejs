@@ -17,15 +17,11 @@
      <!--filters-->  
      <aside class="off-canvas position-left reveal-for-large" id="offCanvas" data-off-canvas>
        <label><h4 class="underline">Sort by</h4>
-        <select>
-          <option value="relevance">Relevance</option>
-          <option value="n-to-o">Newest to oldest</option>
-          <option value="o-to-n">Oldest to newset</option>
-          <option value="alpha">Alphabetical</option>
-          <option value="p1">Phase 1</option>
-          <option value="p2">Phase 2</option>
-          <option value="p3">Phase 3</option>
-          <option value="p4">Phase 4</option>
+        <select ng-model="sortType">
+          <option value="relevance" selected>Relevance</option>
+          <option value="newestToOldest">Newest to oldest</option>
+          <option value="oldestToNewest">Oldest to newset</option>
+          <option value="alphabetical">Alphabetical</option>
         </select>
       </label>
       <small><a class="float-right small" id="uncheck">Clear all</a></small>
@@ -86,7 +82,8 @@
       </div>
     </div>
     <h5>There are {{ filtered.length }} studies that match your eligibility filters.</h5>
-    <div class="row  ct" ng-repeat="study in data.results | filter: combinedFilter as filtered">
+    <!-- Search Results Listing -->
+    <div class="row  ct" ng-repeat="study in data.results | orderBy: sortFunction | filter: combinedFilter as filtered">
      <div class="small-12 medium-9 columns underline">
       <h3><span ng-if="study.phase != 'N/A'" class="phase">{{ study.phase }}: </span>{{ study.brief_title }}</h3>
       <p class="crop"> {{ study.brief_summary }}</p>

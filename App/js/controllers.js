@@ -4,6 +4,8 @@ var app = angular.module('app', [])
 app.controller('SearchResultsController', ['$scope', function($scope) {
     $scope.data = data;
 
+    // Filtering
+
     $scope.filters = {}
 
     $scope.filters.phases = {
@@ -107,6 +109,27 @@ app.controller('SearchResultsController', ['$scope', function($scope) {
         }
 
         return state;
+    }
+    
+
+    // Sorting
+
+    $scope.sortType = 'relevance';
+
+    $scope.sortFunction = function(study) {
+        
+        var date = new Date(study.last_updated);
+
+        switch ($scope.sortType) {
+            case 'newestToOldest':
+                return -date;
+            case 'oldestToNewest':
+                return date;
+            case 'alphabetical':
+                return study.brief_title;
+            default:
+                return 1;
+        }
     }
 
 
