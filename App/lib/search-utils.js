@@ -18,7 +18,7 @@ var util = require('util');
  * @param {Integer} index           - The current index
  */
    
-function propertyCheck(currentObject, queryArr, ref, matches, index) {
+function propertyCheck(currentObject, queryArr, ref) {
    
     var currentVal = ref.getVal(currentObject);
     
@@ -30,9 +30,6 @@ function propertyCheck(currentObject, queryArr, ref, matches, index) {
             
             // Perform search and add to array
             if (findMatch(queryArr, currentVal)) {
-                if(matches.indexOf(index) === -1) {
-                    matches.push(index);
-                }
                 return true;
             }
             
@@ -43,14 +40,11 @@ function propertyCheck(currentObject, queryArr, ref, matches, index) {
                 if (currentVal.hasOwnProperty(i)) {
                     
                     if (typeof currentVal[i] !== "string") {
-                        // throw ("Error: " + currentVal[i] + " is not a searchable string or array of strings."); 
+                        throw ("Error: " + currentVal[i] + " is not a searchable string or array of strings."); 
                     }
                     
                     // Perform search and add to array
                     if (findMatch(queryArr, currentVal[i])) {
-                        if(matches.indexOf(index) === -1) {
-                            matches.push(index);
-                        }
                         return true;
                     }
                 }
@@ -71,7 +65,8 @@ function propertyCheck(currentObject, queryArr, ref, matches, index) {
 function findMatch(needleArr, haystack) {
 
     for (var i = 0; i < needleArr.length; i++) {
-        if (haystack.indexOf(needleArr[i]) !== -1) {
+        var regex = new RegExp(needleArr[i], "i");
+        if (haystack.match(regex)) {
             return true
         }
     }
@@ -96,6 +91,7 @@ var self = module.exports = {
      */  
         
     search: function(objectArr, queryArr, propertyArr, matchesArr) {
+        // This flag indicates whether the function should return an array of matches or not
         var returnFlag = false;
         
         // Initialize matches if not passed in
@@ -113,7 +109,10 @@ var self = module.exports = {
                 if (propertyArr.hasOwnProperty(j)) {
                     var property = propertyArr[j];
                     
-                    if (propertyCheck(obj, queryArr, new StringRef(property), matchesArr, i)) {
+                    if (propertyCheck(obj, queryArr, new StringRef(property))) {
+                        if(matchesArr.indexOf(i) === -1) {
+                            matchesArr.push(i);
+                        }
                         break;
                     }
                 }
@@ -184,6 +183,49 @@ var self = module.exports = {
                 callback(matches);
             }
         });
+    },
+
+
+    /**
+    * Gets the search score (relevancy) for all results
+    *
+    * @param {object} results       - The results being iterated over
+    * @param {Array} queryArr       - An array of search terms
+    */
+
+    getSearchScore: function(results, queryArr) {
+        
+        var totalScore = 0;
+
+        var scores = {
+            'keywords': 5,
+            'brief_title': 10,
+            'official_title': 5,
+            'brief_summary': 3,
+            'detailed_description': 2
+        }
+
+        // Iterate over results
+        for (var j in results) {
+            if (results.hasOwnProperty(j)) {
+
+                var keys = Object.keys(results[j]);
+
+                // Iterate over keys and decide what score to assign for a match
+                for (var key = 0; key < keys.length; key++) {
+
+
+                    // The check if any of the query terms are found in this key
+                    if (propertyCheck(results[j], queryArr, new StringRef(keys[key]))) {
+                        totalScore += scores[keys[key]];
+                    }
+                }
+                // Record the score and reset totalScore
+                results[j].score = totalScore;
+                totalScore = 0;
+            }
+        }
+        return results;
     },
     
     

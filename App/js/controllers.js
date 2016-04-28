@@ -127,6 +127,8 @@ app.controller('SearchResultsController', ['$scope', function($scope) {
                 return date;
             case 'alphabetical':
                 return study.brief_title;
+            case 'relevance':
+                return -study.score;
             default:
                 return 1;
         }

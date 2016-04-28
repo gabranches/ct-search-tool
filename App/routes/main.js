@@ -3,6 +3,7 @@ var searchUtils = require('../lib/search-utils');
 var bodyParser = require('body-parser');
 var data = require('../data/output.json');
 var studies = data.studies.clinical_study;
+var util = require('util');
 
 module.exports = function(app, root) {
 
@@ -47,6 +48,8 @@ module.exports = function(app, root) {
             }
         );
 
+
+
         res.render('details', {
                 data: results
         });
@@ -70,6 +73,7 @@ module.exports = function(app, root) {
                     'brief_title.0',
                     'official_title.0', 
                     'detailed_description.0.textblock.0',
+                    'keyword'
                 ]       
             );
             
@@ -88,10 +92,16 @@ module.exports = function(app, root) {
                     health: 'eligibility.0.healthy_volunteers.0',
                     minimum_age: 'eligibility.0.minimum_age.0',
                     maximum_age: 'eligibility.0.maximum_age.0',
-                    gender: 'eligibility.0.gender.0'
+                    gender: 'eligibility.0.gender.0',
+                    official_title: 'official_title.0',
+                    detailed_description: 'detailed_description.0.textblock.0'
                 }
             );
             
+            var results = searchUtils.getSearchScore(results, synArr);
+
+            // console.log(util.inspect(results));
+
             // Render the page and pass in data
             console.log('Sending data...');
             res.render('search-results', {
