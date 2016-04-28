@@ -1,0 +1,13 @@
+
+  <div class="small-12 medium-9 columns underline">
+    <h3><span ng-if="study.phase != 'N/A'" class="phase">{{ study.phase }}: </span>{{ study.brief_title }}</h3>
+    <p class="crop"> {{ study.brief_summary }}</p>
+    <fieldset ng-show="study.keywords.length > 0" class="fieldset">
+        <legend>Keywords</legend>
+        <span class="keyword" ng-repeat="keyword in study.keywords">
+          <a href="/search-results/{{ encodeURI(keyword) }}">{{ keyword }}</a>
+        </span>
+    </fieldset>
+    <a href="/details/{{ study.nct_id }}" class="button float-right">Read More</a>
+    <small><strong>Last updated: </strong> {{ study.last_updated }}</small>
+  </div>
