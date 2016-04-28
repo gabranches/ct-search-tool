@@ -32,7 +32,7 @@
     <i class="fa fa-plus-circle float-right" id="details-icons"></i>
     </h5> 
     <section id="details">
-    <h5>Overall Officials</h5>
+    <h5 ng-show="data.overall_outcome.length > 0">Overall Officials</h5>
     <div ng-repeat="official in data.overall_officials">
       <p>{{ official.last_name[0] }} ( {{ official.role[0] }} ) </p>
     </div>
@@ -45,7 +45,7 @@
       </ul>
     </ul>
 
-    <h5>Secondary outcome measures</h5>
+    <h5 ng-show="data.secondary_outcome.length > 0">Secondary outcome measures</h5>
     <ul ng-repeat="outcome in data.secondary_outcome">
       <li>{{ outcome.measure[0] }}
       <ul>

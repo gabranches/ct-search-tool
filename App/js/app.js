@@ -1,16 +1,16 @@
 $(document).foundation();
 
-$("#uncheck").click(function(){
-    if($(this).text() == 'Clear all'){
-        $(this).text('Check all');
-        $('input[type="checkbox"]').prop('checked', false);;
-        console.log("uncheck");
-    } else {
-        $(this).text('Clear all')
-        $('input[type="checkbox"]').prop('checked', true);
-        console.log("check");
-    }
-})
+// $("#uncheck").click(function(){
+//     if($(this).text() == 'Clear all'){
+//         $(this).text('Check all');
+//         $('input[type="checkbox"]').prop('checked', false);;
+//         console.log("uncheck");
+//     } else {
+//         $(this).text('Clear all')
+//         $('input[type="checkbox"]').prop('checked', true);
+//         console.log("check");
+//     }
+// })
 
 $('#details').slideUp();
 
@@ -62,16 +62,14 @@ $('.input-group-button').click(function() {
 });
 
 $('.search-term').click(function() {
-    console.log('click');
     var searchParam = encodeURIComponent($(this).find('a').val());
     redirect('/search-results', '/' + searchParam);    
 });
+
 
 function redirect(root, queryString) {
     if (queryString.trim() != '') {
         window.location = root + queryString;
     }
 }
-
-
 

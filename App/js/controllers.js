@@ -1,10 +1,34 @@
 var app = angular.module('app', [])
 
+// SERVICES
 
-app.controller('SearchResultsController', ['$scope', function($scope) {
+app.service('encodeURI', function() {
+    return function(text) {
+        return encodeURIComponent(text);
+    }
+});
+
+// DIRECTIVES
+
+
+// CONTROLLERS
+
+app.controller('SearchResultsController', ['$scope', '$timeout', 'encodeURI', function($scope, $timeout, encodeURI) {
+
+    $scope.showResults = true;
+
+    $scope.hideResults = function() {
+        $scope.showResults = false;
+        $timeout( function(){
+            $scope.showResults = true; 
+        }, 500);  // artificial wait of 1/2 second
+    }    
+
     $scope.data = data;
 
     // Filtering
+
+    $scope.encodeURI = encodeURI;
 
     $scope.filters = {}
 
@@ -31,7 +55,7 @@ app.controller('SearchResultsController', ['$scope', function($scope) {
 
 
     // $scope.$watch('filters', function() {
-    //     console.log('changed');
+    //     $('#results').hide();
     // }, true);
 
     phaseFilter = function(study) {
@@ -92,6 +116,7 @@ app.controller('SearchResultsController', ['$scope', function($scope) {
 
     $scope.combinedFilter = function(study) {
 
+
         var health = healthFilter(study);
         var phase = phaseFilter(study);
         var age = ageFilter(study);
@@ -99,14 +124,14 @@ app.controller('SearchResultsController', ['$scope', function($scope) {
 
         var state = (health && phase && age && gender);
 
-        if(!state) {
-            console.log('- - - - - ');
-            console.log('health: ' + study.health);
-            console.log('phase: ' + study.phase);
-            console.log('min age: ' + study.minimum_age);
-            console.log('max age: ' + study.maximum_age);
-            console.log('gender: ' + study.gender);
-        }
+        // if(!state) {
+        //     console.log('- - - - - ');
+        //     console.log('health: ' + study.health);
+        //     console.log('phase: ' + study.phase);
+        //     console.log('min age: ' + study.minimum_age);
+        //     console.log('max age: ' + study.maximum_age);
+        //     console.log('gender: ' + study.gender);
+        // }
 
         return state;
     }
@@ -134,17 +159,33 @@ app.controller('SearchResultsController', ['$scope', function($scope) {
         }
     }
 
+    $scope.resetFilters = function () {
+        
+        // Reset radio buttons
+        $("#both").prop("checked", true);
+        $scope.filters.gender = 'Both';
 
+        // Check all checkboxes
+        $("#offCanvas").find("input:checkbox").each(function() {
+            $(this).prop('checked', true);
+        });
+
+        // Reset filters
+        setAll($scope.filters.age, true);
+        setAll($scope.filters.health, true);
+        setAll($scope.filters.phases, true);
+
+        // Update filters
+        $scope.$apply();
+    }
 }]);
 
-app.controller('DetailsController', ['$scope', '$sce', function($scope, $sce) {
+app.controller('DetailsController', ['$scope', '$sce', 'encodeURI', function($scope, $sce, encodeURI) {
     $scope.data = data[0];
 
     $scope.data.inclusion_criteria = $sce.trustAsHtml(unescape($scope.data.inclusion_criteria));
 
-    $scope.encodeURI = function(text) {
-        return encodeURIComponent(text);
-    }
+    $scope.encodeURI = encodeURI;
 
 }]);
 
@@ -155,10 +196,20 @@ function replaceNewlines(text) {
 // Converts an ageString to an integer representation of age
 // e.g. "18 Years" -> 18
 
+// FUNCTIONS
+
 function getAge(ageString) {
     if (ageString == 'N/A') {
         return null;
     }
     var age = ageString.replace(/(\d+)\sYears/g, '$1'); 
     return parseInt(age);
+}
+
+function setAll(object, value) {
+    for (i in object) {
+        if(object.hasOwnProperty(i)) {
+            object[i] = value;
+        }
+    }
 }
