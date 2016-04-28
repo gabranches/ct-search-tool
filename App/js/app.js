@@ -54,7 +54,11 @@ $('#copy').click(function() {
     $(".email-msg").show();
 });
 
-// Gustavo's code
+//** Gustavo's code **//
+
+var app = angular.module('app', [])
+
+// EVENT LISTENERS
 
 $('.input-group-button').click(function() {
     var searchParam = encodeURIComponent($(this).parent().find('.input-group-field').val());
@@ -66,10 +70,33 @@ $('.search-term').click(function() {
     redirect('/search-results', '/' + searchParam);    
 });
 
+// FUNCTIONS
 
 function redirect(root, queryString) {
     if (queryString.trim() != '') {
         window.location = root + queryString;
     }
 }
+
+function replaceNewlines(text) {
+    return text.replace('\n', '<br>');
+}
+
+
+function getAge(ageString) {
+    if (ageString == 'N/A') {
+        return null;
+    }
+    var age = ageString.replace(/(\d+)\sYears/g, '$1'); 
+    return parseInt(age);
+}
+
+function setAll(object, value) {
+    for (i in object) {
+        if(object.hasOwnProperty(i)) {
+            object[i] = value;
+        }
+    }
+}
+
 

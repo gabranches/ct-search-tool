@@ -1,16 +1,3 @@
-var app = angular.module('app', [])
-
-// SERVICES
-
-app.service('encodeURI', function() {
-    return function(text) {
-        return encodeURIComponent(text);
-    }
-});
-
-// DIRECTIVES
-
-
 // CONTROLLERS
 
 app.controller('SearchResultsController', ['$scope', '$timeout', 'encodeURI', function($scope, $timeout, encodeURI) {
@@ -53,10 +40,6 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'encodeURI', fu
 
     $scope.filters.gender = 'Both';
 
-
-    // $scope.$watch('filters', function() {
-    //     $('#results').hide();
-    // }, true);
 
     phaseFilter = function(study) {
         if ($scope.filters.phases.hasOwnProperty(study.phase)) {
@@ -124,6 +107,7 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'encodeURI', fu
 
         var state = (health && phase && age && gender);
 
+        // Results that don't pass the filter
         // if(!state) {
         //     console.log('- - - - - ');
         //     console.log('health: ' + study.health);
@@ -188,28 +172,3 @@ app.controller('DetailsController', ['$scope', '$sce', 'encodeURI', function($sc
     $scope.encodeURI = encodeURI;
 
 }]);
-
-function replaceNewlines(text) {
-    return text.replace('\n', '<br>');
-}
-
-// Converts an ageString to an integer representation of age
-// e.g. "18 Years" -> 18
-
-// FUNCTIONS
-
-function getAge(ageString) {
-    if (ageString == 'N/A') {
-        return null;
-    }
-    var age = ageString.replace(/(\d+)\sYears/g, '$1'); 
-    return parseInt(age);
-}
-
-function setAll(object, value) {
-    for (i in object) {
-        if(object.hasOwnProperty(i)) {
-            object[i] = value;
-        }
-    }
-}

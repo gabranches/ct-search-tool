@@ -79,7 +79,9 @@
             </div>
           </div>
           <h4 class="underline">Related searches</h4>
-          <span ng-repeat="term in data.related" class="search-term"><a href="/search-results/{{ encodeURI(term) }}">{{ term }}</a></span>
+          <span ng-repeat="term in data.related" class="search-term">
+            <a href="/search-results/{{ encodeURI(term) }}">{{ term }}</a>
+          </span>
         </fieldset>
       </div>
     </div>
@@ -87,18 +89,9 @@
     <!-- Search Results Listing -->
     <div id="results" ng-show="showResults">
       <div class="row  ct" ng-repeat="study in data.results | orderBy: sortFunction | filter: combinedFilter as filtered">
-       <div class="small-12 medium-9 columns underline">
-        <h3><span ng-if="study.phase != 'N/A'" class="phase">{{ study.phase }}: </span>{{ study.brief_title }}</h3>
-        <p class="crop"> {{ study.brief_summary }}</p>
-        <fieldset ng-show="study.keywords.length > 0" class="fieldset">
-          <legend>Keywords</legend>
-          <span class="keyword" ng-repeat="keyword in study.keywords"><a href="/search-results/{{ encodeURI(keyword) }}">{{ keyword }}</a></span>
-        </fieldset>
-        <a href="/details/{{ study.nct_id }}" class="button float-right">Read More</a>
-        <small><strong>Last updated: </strong> {{ study.last_updated }}</small>
-      </div>
+         <search-result></search-result>
+       </div>
     </div>
-  </div>
 </div>
 
 <a class="exit-off-canvas"></a>
