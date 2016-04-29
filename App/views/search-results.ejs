@@ -56,15 +56,23 @@
         <input id="p4" type="checkbox" ng-model="filters.phases['Phase 4']" checked><label for="p4">Phase 4</label><br>
         <input id="pn" type="checkbox" ng-model="filters.phases['N/A']" checked><label for="pn">Not Specified</label><br>
       </fieldset>
+      <label><h4 class="underline">Show studies updated:</h4>
+        <select ng-model="lastUpdated">
+          <option value="0" selected>Any time</option>
+          <option value="180">Last six months</option>
+          <option value="90">Last three months</option>
+          <option value="30">Last month</option>
+        </select>
+      </label>
     </aside>
     <!--end filters-->
     <div class="small-12 columns off-canvas-content" data-off-canvas-content>
       <div class="row">
-       <div class="small-12 columns underline">
-         <h4>{{ data.numMatches }} clinical trials found for {{ data.query }}</h4>
-       </div>
-     </div>
-
+        <div class="small-12 columns underline">
+          <h4>{{ data.numMatches }} clinical trials found for {{ data.query }}</h4>
+        </div>
+      </div>
+      
      <div class="row">
        <div class="small-9 columns">
          <button type="button" class="button button-filter hide-for-large" data-toggle="offCanvas"><i class="fa fa-filter"></i> filters</button>

@@ -78,11 +78,6 @@ function redirect(root, queryString) {
     }
 }
 
-function replaceNewlines(text) {
-    return text.replace('\n', '<br>');
-}
-
-
 function getAge(ageString) {
     if (ageString == 'N/A') {
         return null;

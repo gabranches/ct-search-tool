@@ -1,8 +1,9 @@
 // CONTROLLERS
 
-app.controller('SearchResultsController', ['$scope', '$timeout', 'encodeURI', function($scope, $timeout, encodeURI) {
+app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', function($scope, $timeout, myUtils) {
 
     $scope.showResults = true;
+    $scope.lastUpdated = "0";
 
     $scope.hideResults = function() {
         $scope.showResults = false;
@@ -15,9 +16,11 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'encodeURI', fu
 
     // Filtering
 
-    $scope.encodeURI = encodeURI;
+    $scope.encodeURI = myUtils.encodeURI;
 
     $scope.filters = {}
+
+
 
     $scope.filters.phases = {
         'Phase 1': true,
@@ -96,6 +99,17 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'encodeURI', fu
         }
     }
 
+    lastUpdatedFilter = function(study) {
+
+        if ($scope.lastUpdated == 0) return true;
+
+        var now = new Date().getTime();
+        var date = new Date(study.last_updated).getTime();
+        var updateUTC = $scope.lastUpdated * 24 * 60 * 60 * 1000;
+
+        return (now - date < updateUTC);
+    }
+
 
     $scope.combinedFilter = function(study) {
 
@@ -104,8 +118,9 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'encodeURI', fu
         var phase = phaseFilter(study);
         var age = ageFilter(study);
         var gender = genderFilter(study);
+        var lastUpdated = lastUpdatedFilter(study);
 
-        var state = (health && phase && age && gender);
+        var state = (health && phase && age && gender && lastUpdated);
 
         // Results that don't pass the filter
         // if(!state) {
@@ -120,6 +135,26 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'encodeURI', fu
         return state;
     }
     
+    $scope.resetFilters = function () {
+        
+        // Reset radio buttons
+        $("#both").prop("checked", true);
+        $scope.filters.gender = 'Both';
+
+        // Check all checkboxes
+        $("#offCanvas").find("input:checkbox").each(function() {
+            $(this).prop('checked', true);
+        });
+
+        // Reset filters
+        setAll($scope.filters.age, true);
+        setAll($scope.filters.health, true);
+        setAll($scope.filters.phases, true);
+        $scope.lastUpdated = "0";
+
+        // Update filters
+        $scope.$apply();
+    }
 
     // Sorting
 
@@ -143,32 +178,12 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'encodeURI', fu
         }
     }
 
-    $scope.resetFilters = function () {
-        
-        // Reset radio buttons
-        $("#both").prop("checked", true);
-        $scope.filters.gender = 'Both';
-
-        // Check all checkboxes
-        $("#offCanvas").find("input:checkbox").each(function() {
-            $(this).prop('checked', true);
-        });
-
-        // Reset filters
-        setAll($scope.filters.age, true);
-        setAll($scope.filters.health, true);
-        setAll($scope.filters.phases, true);
-
-        // Update filters
-        $scope.$apply();
-    }
 }]);
 
-app.controller('DetailsController', ['$scope', '$sce', 'encodeURI', function($scope, $sce, encodeURI) {
+app.controller('DetailsController', ['$scope', 'myUtils', function($scope, myUtils) {
     $scope.data = data[0];
 
-    $scope.data.inclusion_criteria = $sce.trustAsHtml(unescape($scope.data.inclusion_criteria));
-
-    $scope.encodeURI = encodeURI;
+    $scope.replaceNewlines = myUtils.replaceNewlines;
+    $scope.encodeURI = myUtils.encodeURI;
 
 }]);
