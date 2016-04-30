@@ -63,12 +63,12 @@
   
      </div>  
       <div class="small-12 medium-3 columns">
-    <fieldset ng-show="data.contact.last_name.length > 0" class="fieldset" id="contact">
+    <fieldset ng-show="data.contact" class="fieldset" id="contact">
         <legend>Contact Information</legend>
         Email or leave a message for the research coordinator to see if this trials is right for you. 
         <ul>
-            <li>{{ data.contact.last_name[0] }}</li>
-            <li>Call {{ data.contact.phone[0] }}</li>
+            <li>{{ data.contact.first_name[0] }} {{ data.contact.last_name[0] }}</li>
+            <li ng-show="data.contact.phone[0]">Call {{ data.contact.phone[0] }}</li>
             <li><a href="mailto:{{ data.contact.email[0] }}">{{ data.contact.email[0] }}</a></li>
         </ul>
         <a href="#" class="button" data-open="send-msg"><i class="fa fa-envelope-o"></i> Send a message</a>
@@ -78,7 +78,7 @@
     <div class="reveal" id="send-msg" data-reveal ng-controller="DetailsController">
         <h3>Send a message</h3>
         <p>
-        to: <strong>{{ data.contact.last_name[0] }}</strong>
+        to: <strong>{{ data.contact.first_name[0] }} {{ data.contact.last_name[0] }}</strong>
         </p>
         <p>Study:<br>
         <span>{{ data.official_title }}</span></p>

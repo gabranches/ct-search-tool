@@ -183,6 +183,25 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
 app.controller('DetailsController', ['$scope', 'myUtils', function($scope, myUtils) {
     $scope.data = data[0];
 
+    // Replace this for the contact information if there isn't any
+    if (!$scope.data.contact) {
+        $scope.data.contact = {
+            first_name: ['John'],
+            last_name: ['Doe'],
+            phone: ['555-555-5555'],
+            email: ['testemail@miami.edu']
+        };
+    }
+
+    // If there is no last name, replace it with "Primary Contact"
+    if ($scope.data.contact.last_name[0]) {
+        if ($scope.data.contact.last_name[0].indexOf("Use link") != -1) {
+            $scope.data.contact.last_name = ['Primary Contact'];
+        }
+    }
+
+
+
     $scope.replaceNewlines = myUtils.replaceNewlines;
     $scope.encodeURI = myUtils.encodeURI;
 
