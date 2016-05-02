@@ -163,9 +163,43 @@ h1, h2, h3, h4, h5, h6 {
 
 .browse {
  padding-top: 20px;
+    background: $light-gray;
+    margin: auto;
+    padding-bottom: 40px;
+    
+    .browse-categories {
+        margin: auto;
+        @media only screen and (min-width: 64.063em) {
+        width: 80%;
+        } 
+    }
+    .browse-section {
+        margin-top: 15px;
+        padding: 20px;
+        h4 {
+            border-top: 4px solid $mid-gray;
+            padding-top: 10px;
+            font-family: "helvetica", sans-serif;
+            font-size: 18px;
+            color: $dark-gray;
+            font-weight: bold;
+        }
+    }
+    
+    a {
+        color: $um-green;
+        text-decoration: underline;
+    }
 h2 {
     color: $um-green;
     font-size: 36px;
     text-transform: uppercase;
 }
+    
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
 }
