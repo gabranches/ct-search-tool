@@ -8,24 +8,29 @@
 <div class="row" id="landing-header">
     <div class="small-12 landing-header-media">
 	    <img src="img/banner.jpg" alt="Photo description" class="landing-img" />
-	    <div class="landing-header-content">
+	    <div class="landing-header-content show-for-large">
       <div class="hero-subheader visible-lg-block  visible-md-block">
       Gain access to life saving treatments<br>
 Help bring us closer to a cure for diseases</div>
 	      <h1 class="hero-header visible-lg-block  visible-md-block">Find a health<br>research study</h1>
 	      <div class="hero-search">
 	          The University of Miami is currently accepting patients for 593 clinical studies.
-          <div class="input-group">
-            <input class="input-group-field" type="text" placeholder="Search by condition, treatment, sponsor or keywords">
-            <div class="input-group-button">
-             <button class="button btn-search" value="Submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-            </div>
-          </div>
+	          <% include search %>
+          
 	      </div>
 
 	    </div>
     </div>
   </div> <!-- Close banner row -->
+  <!--mobile search-->
+   <div class="mobile-search hide-for-large">
+     Search ongoing clinical research studies:
+      <div class="bump10">
+       <% include search %>
+       </div>
+   </div>
+   <!-- end mobile search-->
+  
 <!--end banner-->
     <div class="browse row">
         <h2 class="text-center">
@@ -110,6 +115,12 @@ Help bring us closer to a cure for diseases</div>
                 </ul>
             </section>
             </div>
+        </div>
+        <div class="accepting row">
+            <div class="small-12 text-center">
+                The University of Miami is currently accepting people for <span class="orange">567 clinical trials.</span><br>
+            Let us help you find the right one for you.
+            </div> 
         </div>
 
 

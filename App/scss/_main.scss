@@ -15,6 +15,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Georgia', serif;
 }
 
+.bump10 { margin-top: 10px;}
 
 .banner {
     padding-bottom: 20px;
@@ -161,6 +162,10 @@ h1, h2, h3, h4, h5, h6 {
     background-color: $um-green;
 }
 
+.button:hover, .button:focus {
+    background-color: $um-orange;
+}
+
 .browse {
  padding-top: 20px;
     background: $light-gray;
@@ -202,4 +207,21 @@ h2 {
         padding: 0;
     }
     
+}
+
+.accepting {
+    background-color: $um-green;
+    color: white;
+    font-weight: bold;
+    padding: 30px;
+    line-height: 2em;
+}
+
+.orange {
+    color: $um-orange;
+}
+
+.mobile-search {
+    background-color: $mid-gray;
+    padding: 20px;
 }
