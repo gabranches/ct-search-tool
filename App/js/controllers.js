@@ -200,9 +200,11 @@ app.controller('DetailsController', ['$scope', 'myUtils', function($scope, myUti
         }
     }
 
-
+    $scope.helpful = 'undefined';
 
     $scope.replaceNewlines = myUtils.replaceNewlines;
     $scope.encodeURI = myUtils.encodeURI;
+
+    $scope.goBack = myUtils.goBack;
 
 }]);

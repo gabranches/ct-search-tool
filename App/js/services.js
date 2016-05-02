@@ -10,6 +10,15 @@ app.service('myUtils', function() {
 	    replaceNewlines: function(text) {
 	    	console.log(text);
 	    	return text;
-	    }
+	    },
+
+        goBack: function(link) {
+            if(window.history.length == 0) {
+                // Do nothing
+            } else {
+                window.history.back();
+            }
+
+        }
 	}
 });
