@@ -10,7 +10,7 @@
 
 <div class="row details" ng-controller="DetailsController">
       <div class="small-12 medium-9 columns">
-    <a href="/search-results"><i class="fa fa-backward"></i> back to search results</a>
+    <a href ng-click="goBack()"><i class="fa fa-backward"></i> back to search results</a>
     <h4><span class="phase">{{ data.phase }}:</span> {{ data.official_title }}</h4>
     
     <p>{{ data.brief_summary }}</p>
@@ -59,6 +59,18 @@
     <fieldset ng-show="data.keywords.length > 0" class="fieldset">
       <legend>Keywords</legend>
       <span class="keyword" ng-repeat="keyword in data.keywords"><a href="/search-results/{{ encodeURI(keyword) }}">{{ keyword }}</a></span>
+    </fieldset>
+    <fieldset class="fieldset">
+      <legend>Did you find this description helpful?</legend>
+      <div>
+        <button style="width: 120px" href="#" ng-click="helpful = 1" ng-show="helpful != 0" class="button">Yes</button>
+        <button style="width: 120px" href="#" ng-click="helpful = 0" ng-show="helpful != 1" class="button">No</button>
+      </div>
+      <div>
+      <textarea placeholder="Please enter your comments or concerns here." type="textarea" ng-model="reason" ng-show="helpful == 0"></textarea>
+      <button class="button" ng-show="helpful == 0">Submit Feedback</button>
+      <span ng-show="helpful == 1">Thank you for your input!</span>
+      </div>
     </fieldset>
   
      </div>  

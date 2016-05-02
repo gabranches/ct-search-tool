@@ -5,6 +5,7 @@ var data = require('../data/output.json');
 var studies = data.studies.clinical_study;
 var util = require('util');
 
+
 module.exports = function(app, root) {
 
     app.use(bodyParser.json());
@@ -59,6 +60,9 @@ module.exports = function(app, root) {
     // ** SEARCH RESULTS PAGE ** //
     
     app.get('/search-results/:query', function(req, res) {
+
+        console.time('query');
+
         var query = decodeURIComponent(req.params.query);
         
         searchUtils.getSynonyms(query, function(synArr) {
