@@ -39,10 +39,15 @@
 //  34. Tooltip
 //  35. Top Bar
 
-@import 'util/util';
+//@import 'util/util';
 
 // 1. Global
 // ---------
+
+
+.test {
+    tf: 2000;
+}
 
 $global-font-size: 100%;
 $global-width: rem-calc(1200);
