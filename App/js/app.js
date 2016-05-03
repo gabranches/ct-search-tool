@@ -90,3 +90,9 @@ function setAll(object, value) {
 }
 
 
+$(".radio-group input").change(function() { 
+    if ($(this).is(":checked")) { 
+        $(this).parent().siblings().css("border", "1px solid white");
+        $(this).parent().css("border", "1px solid #f17327"); 
+    }
+});

@@ -14,18 +14,28 @@
 
 
      <!--filters-->  
-     <aside class="off-canvas position-left reveal-for-large" id="offCanvas" data-off-canvas>
+     <aside class="off-canvas position-left reveal-for-large filters" id="offCanvas" data-off-canvas>
    
-      <small><a ng-click="resetFilters()" class="float-right small" id="uncheck">Reset Filters</a></small>
-      <h4 class="underline">Eligibility Filters</h4> 
+      
+      <div class="lead"><a ng-click="resetFilters()" class="float-right small white bump10" id="uncheck">Clear All</a>Filters</div>
+      <div class="lead-gray">Eligibility</div>
+ 
 
-      <fieldset class="fieldset">
+      <fieldset class="fieldset-filter radio-group button-group">
         <legend>Gender</legend>
-        <input id="both" type="radio" name="gender" ng-model="filters.gender" value="Both"><label for="both">All Studies</label><br>
-        <input id="female" type="radio" name="gender" ng-model="filters.gender" value="Female" ><label for="female">Female Participants</label><br>
-        <input id="male" type="radio" name="gender" ng-model="filters.gender" value="Male"><label for="male">Male Participants</label><br>
+        <div style="margin-left: -10px; margin-right: -10px;">
+        <div class="button">
+        <input id="female" type="radio" name="gender" ng-model="filters.gender" value="Female" ><label for="female">Female</label>
+          </div>
+          <div class="button">
+        <input id="male" type="radio" name="gender" ng-model="filters.gender" value="Male"><label for="male">Male</label>
+          </div>
+          <div class="button">
+        <input id="both" type="radio" name="gender" ng-model="filters.gender" value="Both"><label for="both">All</label>
+        </div>
+        </div>
       </fieldset>
-      <fieldset class="fieldset">
+      <fieldset class="fieldset-filter radio-group button-group">
         <legend>Age</legend>
         <input id="under18" type="checkbox" ng-model="filters.age['Child']" checked><label for="under18">Children (age &lt; 18)</label><br>
         <input id="over18" type="checkbox" ng-model="filters.age['Adult']" checked><label for="over18">Adults (age &gt; 18)</label><br>

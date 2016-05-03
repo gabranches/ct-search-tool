@@ -13,6 +13,8 @@ $mid-gray: #e6e6e6;
 $highlight: #c2cc98;
 $dark-gray: #5d5d5d;
 
+$font-body: 'Noto Sans', sans-serif;
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Georgia', serif;
 }
@@ -166,8 +168,9 @@ a {
 }
 
 
-.btn-search {
+.btn-search, .btn-read-more {
     background-color: $um-green;
+    text-decoration: none;
 }
 
 .button:hover, .button:focus {
@@ -192,7 +195,7 @@ a {
         h4 {
             border-top: 4px solid $mid-gray;
             padding-top: 10px;
-            font-family: "helvetica", sans-serif;
+            font-family: $font-body;
             font-size: 18px;
             color: $dark-gray;
             font-weight: bold;
@@ -302,7 +305,7 @@ footer {
     }
     
     .results-for {
-    font-family: helvetica, sans-serif;
+    font-family: $font-body;
         font-size: 1em;
         color: $dark-gray;
     }
@@ -340,4 +343,101 @@ footer {
         top: 20px; 
         right: 10px;
     }
+}
+
+.last-updated {
+    background: $light-gray;
+    padding: 10px;
+    color: $dark-gray;
+}
+
+.result {
+    h3 {
+        font-family: $font-body;
+        color: $dark-gray;
+        font-size: 24px;
+    }
+}
+
+.keywords {
+    clear: both;
+    border-color: transparent;
+    padding: 0;
+    margin-bottom: 20px;
+//    margin-top: -35px;
+    legend {
+        color: $um-orange;
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
+
+.filters {
+    .lead {
+        background-color: $um-orange;
+        padding: 10px;
+        color: white;
+    }
+    .lead-gray {
+        background-color: $dark-gray;
+        padding: 10px;
+        color: white;
+    }
+    
+    .fieldset-filter {
+        color: $dark-gray;
+        padding: 0 10px;
+        background: $light-gray;
+        position:relative;
+        padding-top:35px;
+        padding-bottom: 15px;
+        margin: 0;
+
+        legend {
+            font-weight: bold;
+            position:absolute;
+            top:5px;
+            left:10px;
+        }
+    }
+    
+    .small {
+    font-size: 0.5em;
+    color: white;
+    display: inline-block;
+}
+}
+
+.radio-group {
+    input[type="radio"] {
+-webkit-appearance: none;
+}
+
+label {
+  padding: 5px 10px;
+}
+
+input[type="radio"]:checked+label { 
+    background-color: $um-orange;
+    border: none;
+    min-width: 100%;
+    color: white;
+}
+    
+div.button input[type="radio"]:checked {
+    background-color: $um-orange;
+}
+
+div.button {
+  padding:0;
+  width:33%;
+  background: lighten($light-gray, 2%);
+
+}
+
+div.button label {
+  color: $dark-gray;
+  margin: 0;
+}
 }
