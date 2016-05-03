@@ -4,3 +4,5 @@ App/node_modules/
 App/npm-debug.log
 App/css
 App/data/wordnet.db
+
+npm-debug.log
