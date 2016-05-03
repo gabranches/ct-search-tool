@@ -24,6 +24,7 @@ a {
     text-decoration: underline;
 }
 
+.bump9 { margin-top: 9px;}
 .bump10 { margin-top: 10px;}
 .bump20 { margin-top: 20px;}
 
@@ -302,6 +303,8 @@ footer {
         color: $um-green;
         font-size: 36;
         text-transform: uppercase;
+        margin-bottom: -5px;
+    margin-top: 0px;
     }
     
     .results-for {
@@ -320,16 +323,16 @@ footer {
 
 .sortBy {
     background: $um-orange;
-    padding: 10px; 
-    height: 60px;
+    padding: 3px 15px; 
+    height: 40px;
     color: #fff;
-    font-size: 24px;
+    font-size: 22px;
 }
 
 .sortByPull {
     background: $light-orange;
-    height: 60px;
-    padding: 10px 0;
+    height: 40px;
+    padding: 0;
     position: relative;
     color: $dark-gray;
     select {
@@ -340,14 +343,15 @@ footer {
     }
     i {
         position: absolute; 
-        top: 20px; 
+        top: 13px; 
         right: 10px;
     }
 }
 
 .last-updated {
     background: $light-gray;
-    padding: 10px;
+    padding: 7px 15px;
+    height: 40px;
     color: $dark-gray;
 }
 
@@ -374,7 +378,7 @@ footer {
 
 
 .filters {
-    .lead {
+    .filter {
         background-color: $um-orange;
         padding: 10px;
         color: white;
@@ -387,7 +391,7 @@ footer {
     
     .fieldset-filter {
         color: $dark-gray;
-        padding: 0 10px;
+//        padding: 0;
         background: $light-gray;
         position:relative;
         padding-top:35px;
@@ -409,35 +413,32 @@ footer {
 }
 }
 
-.radio-group {
-    input[type="radio"] {
--webkit-appearance: none;
-}
-
-label {
-  padding: 5px 10px;
-}
-
-input[type="radio"]:checked+label { 
-    background-color: $um-orange;
-    border: none;
-    min-width: 100%;
-    color: white;
+.fieldset-filter {
+.button-group input{
+  display: none;
 }
     
-div.button input[type="radio"]:checked {
-    background-color: $um-orange;
+.button {
+    background: lighten($light-gray, 2%);
+    color: $dark-gray;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
-div.button {
-  padding:0;
-  width:33%;
-  background: lighten($light-gray, 2%);
-
+.button-group input:checked + label,
+.button-group input:checked + label:active {
+  background-color: $light-orange;
+}
+    
+    select {
+        background-color: $light-orange;
+        border-color: $light-orange;
+        margin-bottom: 0;
+    }
 }
 
-div.button label {
-  color: $dark-gray;
-  margin: 0;
-}
+.off-canvas-content {
+    @media only screen and (min-width: 64.063em) { min-height: 630px; }
+    
 }
