@@ -2,12 +2,9 @@
 
 <div id="spinner-div">
 </div>
-<!--banner-->
-<div class="row banner">
-  <div class="small-6 large-2 columns"><img src="http://placehold.it/200x100"></div>
-  <div class="small-6 large-offset-8 large-2 columns text-right"><img src="http://placehold.it/200x100"></div>
-</div>
-<!--end banner-->
+
+ <% include banner %>
+
 
 
 <div class="row results-page" ng-controller="SearchResultsController">
@@ -18,14 +15,7 @@
 
      <!--filters-->  
      <aside class="off-canvas position-left reveal-for-large" id="offCanvas" data-off-canvas>
-       <label><h4 class="underline">Sort by</h4>
-        <select ng-model="sortType">
-          <option value="relevance" selected>Relevance</option>
-          <option value="newestToOldest">Newest to oldest</option>
-          <option value="oldestToNewest">Oldest to newset</option>
-          <option value="alphabetical">Alphabetical</option>
-        </select>
-      </label>
+   
       <small><a ng-click="resetFilters()" class="float-right small" id="uncheck">Reset Filters</a></small>
       <h4 class="underline">Eligibility Filters</h4> 
 
@@ -66,34 +56,49 @@
       </label>
     </aside>
     <!--end filters-->
-    <div class="small-12 columns off-canvas-content" data-off-canvas-content>
+    <div class="small-12 medium-9 columns off-canvas-content" data-off-canvas-content>
       <div class="row">
-        <div class="small-12 columns underline">
-          <h4>{{ data.numMatches }} clinical trials found for {{ data.query }}</h4>
+       <div class="small-12 columns">
+         <button type="button" class="button button-filter hide-for-large" data-toggle="offCanvas"><i class="fa fa-filter"></i> filters</button>
+
+<!--
+         <fieldset  class="fieldset">
+           <legend>New Search:</legend>
+-->
+           <% include search %>
+         
+<!--        </fieldset>-->
+      </div>
+  
+       
+        <div class="small-12 columns">
+         <h1>Search Results</h1>
+          <h5 class="results-for"><strong>{{ data.numMatches }} research studies</strong> found for <strong>{{ data.query }}</strong> and {{ filtered.length }} match your eligibility filters</h5>
         </div>
       </div>
       
      <div class="row">
-       <div class="small-9 columns">
-         <button type="button" class="button button-filter hide-for-large" data-toggle="offCanvas"><i class="fa fa-filter"></i> filters</button>
-
-         <fieldset  class="fieldset">
-           <legend>Search:</legend>
-           <div class="input-group">
-            <input class="input-group-field" id="search-box" type="text" placeholder="Search by condition, treatment, sponsor or keywords">
-
-            <div class="input-group-button">
-              <input type="submit" class="button" value="Submit">
-            </div>
-          </div>
-          <h4 class="underline">Related searches</h4>
+          <div class="small-12 columns">
+           <div class="related">Related searches</div>
           <span ng-repeat="term in data.related" class="search-term">
-            <a href="/search-results/{{ encodeURI(term) }}">{{ term }}</a>
+            <a href="/search-results/{{ encodeURI(term) }}">{{ term }}</a>{{$last ? '' : ($index==data.length-2) ? ' and ' : ', '}}
+            
+            
           </span>
-        </fieldset>
       </div>
-    </div>
-    <h5>There are {{ filtered.length }} studies that match your eligibility filters.</h5>
+     </div>
+     <div class="row bump20">
+         <div class="small-12 medium-9 columns sortBy">Sort by</div>
+         <div class="small-12 medium-3 columns sortByPull"> 
+         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+         <select ng-model="sortType">
+          <option value="relevance" selected>Relevance </option>
+          <option value="newestToOldest">Newest to oldest</option>
+          <option value="oldestToNewest">Oldest to newset</option>
+          <option value="alphabetical">Alphabetical</option>
+        </select></div>
+     </div>
+
     <!-- Search Results Listing -->
     <div id="results" ng-show="showResults">
       <div class="row  ct" ng-repeat="study in data.results | orderBy: sortFunction | filter: combinedFilter as filtered">
