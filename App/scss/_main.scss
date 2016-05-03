@@ -13,7 +13,15 @@ $mid-gray: #e6e6e6;
 $highlight: #c2cc98;
 $dark-gray: #5d5d5d;
 
-$font-body: 'Noto Sans', sans-serif;
+$font-body: Helvetica Neue,Helvetica,Arial,sans-serif;
+
+
+body {
+    font-family: $font-body;
+    font-weight: 200;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Georgia', serif;
@@ -90,7 +98,7 @@ a {
 
 
 #details {
-    background: $screen;
+//    background: $screen;
     padding: 10px;
     
     h5 {
@@ -311,14 +319,20 @@ footer {
     font-family: $font-body;
         font-size: 1em;
         color: $dark-gray;
-    }
-    
-    .related {
+    } 
+}
+
+.related {
         color: $um-orange;
         font-weight: bold;
         font-size: 1.2em;
+    font-family: $font-body;
     }
-    
+
+.result-part {
+    margin-top: 30px;
+    padding-bottom: 30px; 
+    border-bottom: 1px solid $mid-gray;
 }
 
 .sortBy {
@@ -441,4 +455,9 @@ footer {
 .off-canvas-content {
     @media only screen and (min-width: 64.063em) { min-height: 630px; }
     
+}
+
+.button-back {
+    background: $um-green;
+    text-decoration: none;
 }

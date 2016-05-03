@@ -1,29 +1,31 @@
 <% include header %>
 <% include banner %>
 
-<div class="row details" ng-controller="DetailsController">
-      <div class="small-12 medium-9 columns">
-    <a href ng-click="goBack()"><i class="fa fa-backward"></i> back to search results</a>
-    <h4><span class="phase">{{ data.phase }}:</span> {{ data.official_title }}</h4>
-    
-    <p>{{ data.brief_summary }}</p>
-    <h4 class="underline">Eligibility</h4>
-    <h5>Age</h5>
-    <p>Minimum: {{ data.minimum_age }} <br />
-    Maximum: {{ data.maximum_age }} </p>
-    <h5>Gender</h5>
-    <p>{{ data.gender }}</p>
-    <h5>Accepting healthy volunteers</h5>
-    <p>{{ data.healthy_volunteers }}</p>
 
-    <h5>Criteria</h5>
+<div class="row details bump20" ng-controller="DetailsController">
+      <div class="small-12 medium-9 columns result">
+    <a ng-click="goBack()" class="button button-back bump20"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> back to search results</a>
+    <h3 class="bump20"><span ng-if="data.phase != 'N/A'">{{ data.phase }}: </span>{{ data.official_title }}</h3>
+
+    
+    <p class="result-part">{{ data.brief_summary }}</p>
+    <section class="result-part">
+        <h4 class="related">Eligibility</h4>
+        <p><strong>Age:</strong> Minimum: {{ data.minimum_age }} <span ng-if="data.maximum_age != 'N/A'">& Maximum: {{ data.maximum_age }}</span> </p>
+        <p><strong>Gender: </strong>{{ data.gender }}</p>
+        <p><strong>Accepting healthy volunteers: </strong>{{ data.healthy_volunteers }}</p>
+
+        <p><strong>Criteria:</strong></p>
     <p style="white-space: pre;"> {{ data.inclusion_criteria }}</p>
+    </section>
+    
     
    
-    <h5 class="underline expand-header" id="details-headers">Details
-<!--    <small class="float-right "><a class="small" id="expand">Expand</a></small>-->
-    <i class="fa fa-plus-circle float-right" id="details-icons"></i>
-    </h5> 
+    <section class="result-part">
+        <div class="related" id="details-headers">Technical Details
+    <i class="fa fa-plus-circle" id="details-icons"></i>
+    </div>
+    
     <section id="details">
     <h5 ng-show="data.overall_outcome.length > 0">Overall Officials</h5>
     <div ng-repeat="official in data.overall_officials">
@@ -49,6 +51,7 @@
     
     
     </section>
+<<<<<<< HEAD
     <fieldset ng-show="data.keywords.length > 0" class="fieldset">
       <legend>Keywords</legend>
       <span class="keyword" ng-repeat="keyword in data.keywords"><a href="/search-results/{{ encodeURI(keyword) }}">{{ keyword }}</a></span>
@@ -65,6 +68,18 @@
       <span ng-show="helpful == 1">Thank you for your input!</span>
       </div>
     </fieldset>
+=======
+    </section> 
+    
+    <section class="result-part">
+        <div class="related">Keywords</div>
+              <span class="keyword" ng-repeat="keyword in data.keywords"><a href="/search-results/{{ encodeURI(keyword) }}">{{ keyword }}</a></span>
+
+        <p></p>
+    </section>
+    
+ 
+>>>>>>> design
   
      </div>  
       <div class="small-12 medium-3 columns">
