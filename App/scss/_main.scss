@@ -1,7 +1,39 @@
 $screen: #efefef;
 
+
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,400italic,700);
+
+$um-green: #005030;
+$mid-green: #91a344;
+//$light-green: 
+$light-orange: #fbd7bb;
+$um-orange: #f17327;
+$light-gray: #f5f5f5;
+$mid-gray: #e6e6e6;
+$highlight: #c2cc98;
+$dark-gray: #5d5d5d;
+
+$font-body: 'Noto Sans', sans-serif;
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Georgia', serif;
+}
+
+a {
+    color: $um-green;
+    text-decoration: underline;
+}
+
+.bump9 { margin-top: 9px;}
+.bump10 { margin-top: 10px;}
+.bump20 { margin-top: 20px;}
+
 .banner {
     padding-bottom: 20px;
+    padding-top: 20px;
+    background: $light-gray;
+    border-bottom: 5px solid $um-orange;
+    
 }
 
 .intro {
@@ -92,10 +124,321 @@ $screen: #efefef;
 
 // Gustavo's CSS
 
-.search-term {
-    margin-right: 15px;
-}
+//.search-term {
+//    margin-right: 15px;
+//}
 
 .keyword {
     margin-right: 15px;
+}
+
+
+
+#landing-header {
+    position: relative;
+    .landing-header-content {
+          position: absolute;
+          top: 10%; 
+          padding: 40px 20px;
+          left: 0px; 
+          max-width: 800px;
+            color: white;
+    }
+    
+    text-shadow: 1px 1px 1px #000;
+    .hero-header {
+        font-size: 46px;
+        text-transform: uppercase;
+    }
+    .hero-subheader {
+        font-size: 24px;
+        margin-top: 10px;
+        a {
+    color: #fff;
+        &:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+    }
+    
+    .landing-img {
+          width: 100%;
+          position: relative; 
+        }
+}
+
+
+.btn-search, .btn-read-more {
+    background-color: $um-green;
+    text-decoration: none;
+}
+
+.button:hover, .button:focus {
+    background-color: $um-orange;
+}
+
+.browse {
+ padding-top: 20px;
+    background: $light-gray;
+    margin: auto;
+    padding-bottom: 40px;
+    
+    .browse-categories {
+        margin: auto;
+        @media only screen and (min-width: 64.063em) {
+        width: 80%;
+        } 
+    }
+    .browse-section {
+        margin-top: 15px;
+        padding: 20px;
+        h4 {
+            border-top: 4px solid $mid-gray;
+            padding-top: 10px;
+            font-family: $font-body;
+            font-size: 18px;
+            color: $dark-gray;
+            font-weight: bold;
+        }
+    }
+    
+    a {
+        color: $um-green;
+        text-decoration: underline;
+    }
+h2 {
+    color: $um-green;
+    font-size: 36px;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+    
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+}
+
+.accepting {
+    background-color: $um-green;
+    color: white;
+    font-weight: bold;
+    padding: 60px;
+    line-height: 2em;
+}
+
+.orange {
+    color: $um-orange;
+}
+
+.mobile-search {
+    background-color: $mid-gray;
+    padding: 20px;
+}
+
+.how-it-works {
+    background: $highlight;
+    padding: 40px 80px 100px 80px;
+    h1 {
+        color: $um-green;
+    }
+}
+
+.home-video {
+    padding: 50px 0;
+    background-color: $light-gray;
+    
+    .play {
+        border-radius: 50%;
+        margin-top: -50%;
+//        padding: 15px;
+        height: 180px;
+        width: 180px;
+        background-color: $light-gray;
+        font-size: 180px;
+        line-height: 0;
+        color: $mid-green;
+        
+        &:hover {
+            color: $um-orange;
+        }
+    }
+    div {
+        height: 25px;
+        color: $um-orange;
+        font-weight: bold;
+        text-transform: uppercase;
+        
+    }
+}
+
+footer {
+    padding: 20px 0; 
+    background-color: $dark-gray;
+    color: white;
+    padding-top: 60px;
+    
+    h3 {
+        color: #fff;
+    font-family: sans-serif;
+    margin-top: 0;
+        font-size: 24px;
+}
+    
+    ul {
+        list-style: none;
+        padding: 0; 
+        margin: 0;
+        a {
+            color: $mid-green;
+        }}
+}
+
+.results-page {
+    margin-top: 20px; 
+    h1 {
+        color: $um-green;
+        font-size: 36;
+        text-transform: uppercase;
+        margin-bottom: -5px;
+    margin-top: 0px;
+    }
+    
+    .results-for {
+    font-family: $font-body;
+        font-size: 1em;
+        color: $dark-gray;
+    }
+    
+    .related {
+        color: $um-orange;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+    
+}
+
+.sortBy {
+    background: $um-orange;
+    padding: 3px 15px; 
+    height: 40px;
+    color: #fff;
+    font-size: 22px;
+}
+
+.sortByPull {
+    background: $light-orange;
+    height: 40px;
+    padding: 0;
+    position: relative;
+    color: $dark-gray;
+    select {
+        color: $dark-gray;
+    margin: 0;
+    background: $light-orange;
+        border-color: transparent;
+    }
+    i {
+        position: absolute; 
+        top: 13px; 
+        right: 10px;
+    }
+}
+
+.last-updated {
+    background: $light-gray;
+    padding: 7px 15px;
+    height: 40px;
+    color: $dark-gray;
+}
+
+.result {
+    h3 {
+        font-family: $font-body;
+        color: $dark-gray;
+        font-size: 24px;
+    }
+}
+
+.keywords {
+    clear: both;
+    border-color: transparent;
+    padding: 0;
+    margin-bottom: 20px;
+//    margin-top: -35px;
+    legend {
+        color: $um-orange;
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
+
+.filters {
+    .filter {
+        background-color: $um-orange;
+        padding: 10px;
+        color: white;
+    }
+    .lead-gray {
+        background-color: $dark-gray;
+        padding: 10px;
+        color: white;
+    }
+    
+    .fieldset-filter {
+        color: $dark-gray;
+//        padding: 0;
+        background: $light-gray;
+        position:relative;
+        padding-top:35px;
+        padding-bottom: 15px;
+        margin: 0;
+
+        legend {
+            font-weight: bold;
+            position:absolute;
+            top:5px;
+            left:10px;
+        }
+    }
+    
+    .small {
+    font-size: 0.5em;
+    color: white;
+    display: inline-block;
+}
+}
+
+.fieldset-filter {
+.button-group input{
+  display: none;
+}
+    
+.button {
+    background: lighten($light-gray, 2%);
+    color: $dark-gray;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.button-group input:checked + label,
+.button-group input:checked + label:active {
+  background-color: $light-orange;
+}
+    
+    select {
+        background-color: $light-orange;
+        border-color: $light-orange;
+        margin-bottom: 0;
+    }
+}
+
+.off-canvas-content {
+    @media only screen and (min-width: 64.063em) { min-height: 630px; }
+    
 }
