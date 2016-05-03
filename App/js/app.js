@@ -1,16 +1,11 @@
 $(document).foundation();
 
-// $("#uncheck").click(function(){
-//     if($(this).text() == 'Clear all'){
-//         $(this).text('Check all');
-//         $('input[type="checkbox"]').prop('checked', false);;
-//         console.log("uncheck");
-//     } else {
-//         $(this).text('Clear all')
-//         $('input[type="checkbox"]').prop('checked', true);
-//         console.log("check");
-//     }
-// })
+$('.close-button').on('click', function() {
+    console.log("blah")
+$('#youtube')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');    
+})
+
+
 
 $('#details').slideUp();
 
@@ -95,5 +90,9 @@ function setAll(object, value) {
 }
 
 
-
-
+$(".radio-group input").change(function() { 
+    if ($(this).is(":checked")) { 
+        $(this).parent().siblings().css("border", "1px solid white");
+        $(this).parent().css("border", "1px solid #f17327"); 
+    }
+});
