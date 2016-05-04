@@ -59,18 +59,7 @@
 
        
     </section>
-    <fieldset class="fieldset">
-      <legend>Did you find this description helpful?</legend>
-      <div>
-        <button style="width: 120px" href="#" ng-click="helpful = 1" ng-show="helpful != 0" class="button">Yes</button>
-        <button style="width: 120px" href="#" ng-click="helpful = 0" ng-show="helpful != 1" class="button">No</button>
-      </div>
-      <div>
-      <textarea placeholder="Please enter your comments or concerns here." type="textarea" ng-model="reason" ng-show="helpful == 0"></textarea>
-      <button class="button" ng-show="helpful == 0">Submit Feedback</button>
-      <span ng-show="helpful == 1">Thank you for your input!</span>
-      </div>
-    </fieldset>
+   
 
   
      </div>  
@@ -85,7 +74,10 @@
         </ul>
         <a href="#" class="button" data-open="send-msg"><i class="fa fa-envelope-o"></i> Send a message</a>
     </fieldset>
-    </div>  
+    </div> 
+    
+     
+       
 </div>
     <div class="reveal" id="send-msg" data-reveal ng-controller="DetailsController">
         <h3>Send a message</h3>
@@ -142,7 +134,30 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
+<div class="row">
+     <div class="fieldset-helpful">
+     <div class="help-intro">We are constantly trying to improve our clinical research pages, please help us improve this page by leaving feedback below.</div>
+     <div class="help-form">
+      <strong ng-hide="helpful == 0 || helpful == 1">Was this clinical research description helpful??</strong>
+      <div>
+        <button style="width: 120px" href="#" ng-click="helpful = 1" ng-hide="helpful == 0 || helpful == 1" class="button">Yes</button>
+        <button style="width: 120px" href="#" ng-click="helpful = 0" ng-hide="helpful == 0 || helpful == 1"  class="button">No</button>
+      </div>
+      <div>
+    
+      <textarea placeholder="Please enter your comments or concerns here." type="textarea" ng-model="reason" ng-show="helpful == 0" rows="5"></textarea>
+      <button class="button" ng-show="helpful == 0">Submit Feedback</button>
+      <div ng-show="helpful == 0">
+          Feedback is anonymous and no personal data will be collected, if you have a question about the research iteself, please use our <a data-open="send-msg">contact form</a>.
+      </div>
+      <strong ng-show="helpful == 1">Thank you for your feedback!</strong>
+      </div>
+    </div>
+    </div>
+    <div class="footer-top">
+     <a href="#top"><i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> Back to Top</a>
+ </div>
+</div>
 <script>
   var data = <%- JSON.stringify(data) %>;
 </script>

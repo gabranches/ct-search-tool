@@ -318,6 +318,9 @@ footer {
     width: 100%;
     padding: 15px;
     text-align: center;
+    background: #fff;
+    border-right: 1px solid $mid-gray;
+    border-left: 1px solid $mid-gray;
 }
 
 .results-page {
@@ -418,6 +421,33 @@ footer {
     }
 }
 
+    .fieldset-helpful {
+        background: $highlight;
+        color: $dark-gray;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+        
+        .help-intro {
+            width: 80%;
+            margin: auto;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .help-form {
+            width: 80%;
+            margin: auto;
+            text-align: left;
+        }
+        .button {
+            background: $um-green;
+        }
+         strong {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+    }
 
 .filters {
     .filter {
@@ -431,9 +461,10 @@ footer {
         color: white;
     }
     
+
+    
     .fieldset-filter {
         color: $dark-gray;
-//        padding: 0;
         background: $light-gray;
         position:relative;
         padding-top:35px;
