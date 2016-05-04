@@ -30,6 +30,10 @@ h1, h2, h3, h4, h5, h6 {
 a {
     color: $um-green;
     text-decoration: underline;
+    cursor: pointer !important;
+    &:hover {
+        cursor: pointer !important;
+    }
 }
 
 .bump9 { margin-top: 9px;}
@@ -322,7 +326,7 @@ footer {
     background: white;
     h1 {
         color: $um-green;
-        font-size: 36;
+        font-size: 36px;
         text-transform: uppercase;
         margin-bottom: -5px;
     margin-top: 0px;
