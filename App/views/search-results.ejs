@@ -89,21 +89,38 @@
        
         <div class="small-12 columns">
          <h1>Search Results</h1>
-          <h5 class="results-for"><strong>{{ data.numMatches }} research studies</strong> found for <strong>{{ data.query }}</strong> and <strong ng-class="filtered.length == 0 ? 'alert-box alert round' : ''">{{ filtered.length }} match your eligibility filters</strong></h5>
+          <h5 class="results-for"><strong ng-class="data.numMatches == 0 ? 'alert' : ''">{{ data.numMatches }} research studies</strong> found for <strong>{{ data.query }}</strong> <span ng-hide="data.numMatches == 0"> and <strong ng-class="filtered.length == 0 ? 'alert' : ''">{{ filtered.length }} match your eligibility filters</strong></span></h5>
         </div>
       </div>
+      
+      <!--error no results found -->
+     <div class="callout warning bump20" ng-show="data.numMatches == 0 || filtered.length == 0 ">
+       <p ng-show="data.numMatches == 0">The search for <strong>{{ data.query }}</strong> did not match any clinical research studies.  </p>
+       
+         <p ng-show="data.numMatches == 0">Suggestions: </p>
+       
+       <ul ng-show="data.numMatches == 0"><li>Make sure all words are spelled correctly.</li><li>Try different keywords.</li><li>Try more general keywords.</li><li>Try fewer keywords.</li></ul>
+     
+       <p ng-show="data.numMatches >= 1 && filtered.length == 0 ">
+       We have not found any matches using your filters. Try using broader eligibility filter parameters. 
+       </p>
+        </div>
+        
       
      <div class="row">
           <div class="small-12 columns">
            <div class="related">Related searches</div>
           <span ng-repeat="term in data.related" class="search-term">
-            <a href="/search-results/{{ encodeURI(term) }}">{{ term }}</a>{{$last ? '' : ($index==data.length-2) ? ' and ' : ', '}}
-            
-            
+            <a href="/search-results/{{ encodeURI(term) }}" ng-hide="data.related.length == 1">{{ term }}</a>{{$last ? '' : ($index==data.length-2) ? ' and ' : ', '}}
           </span>
+          <span ng-show="data.related.length == 1">None found</span>
       </div>
      </div>
-     <div class="rowx bump20">
+     
+     
+     
+     
+     <div class="rowx bump20" ng-hide="data.numMatches == 0 || filtered.length == 0 ">
          <div class="small-12 medium-9 columns sortBy">Sort by</div>
          <div class="small-12 medium-3 columns sortByPull"> 
          <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
