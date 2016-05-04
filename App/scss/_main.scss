@@ -36,6 +36,10 @@ a {
     }
 }
 
+.button {
+    text-decoration: none ;
+}
+
 .bump9 { margin-top: 9px;}
 .bump10 { margin-top: 10px;}
 .bump20 { margin-top: 20px;}
@@ -123,6 +127,25 @@ a {
     i {
         padding: 6px;
         text-shadow: 1px 1px 0 #fff;
+    }
+}
+
+.contact-us {
+
+  .contact-info {
+      background: lighten($light-gray, 2%);
+      padding: 15px;
+  }
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+    .fa {
+        color: $mid-green;
+    }
+    .button {
+        background: $um-green;
+        .fa {color: white;}
     }
 }
 
@@ -449,17 +472,24 @@ footer {
         
     }
 
+    .lead-gray {
+        background-color: $dark-gray;
+        padding: 10px;
+        color: white;
+    }
+
+.contact-screen {
+    padding: 15px;
+    background-color: $light-gray;
+}
+
 .filters {
     .filter {
         background-color: $um-orange;
         padding: 10px;
         color: white;
     }
-    .lead-gray {
-        background-color: $dark-gray;
-        padding: 10px;
-        color: white;
-    }
+
     
 
     

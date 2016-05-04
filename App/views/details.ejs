@@ -64,16 +64,21 @@
   
      </div>  
       <div class="small-12 medium-3 columns">
-    <fieldset ng-show="data.contact" class="fieldset" id="contact">
-        <legend>Contact Information</legend>
-        Email or leave a message for the research coordinator to see if this trials is right for you. 
-        <ul>
-            <li>{{ data.contact.first_name[0] }} {{ data.contact.last_name[0] }}</li>
-            <li ng-show="data.contact.phone[0]">Call {{ data.contact.phone[0] }}</li>
-            <li><a href="mailto:{{ data.contact.email[0] }}">{{ data.contact.email[0] }}</a></li>
+    <div ng-show="data.contact" class="contact-us" id="contact">
+        <div class="lead-gray">Contact Us</div>
+        <div class="contact-screen">
+            Call, email or leave a message for the research coordnator to see if this trial is right for you. 
+        </div>
+                  <div class="contact-info">
+                   <ul>
+            <li><i class="fa fa-user fa-fw" aria-hidden="true"></i> {{ data.contact.first_name[0] }} {{ data.contact.last_name[0] }}</li>
+            <li ng-show="data.contact.phone[0]"><i class="fa fa-phone fa-fw" aria-hidden="true"></i> Call {{ data.contact.phone[0] }}</li>
+            <li><i class="fa fa-envelope-o  fa-fw" aria-hidden="true"></i> <a href="mailto:{{ data.contact.email[0] }}">{{ data.contact.email[0] }}</a></li>
         </ul>
-        <a href="#" class="button" data-open="send-msg"><i class="fa fa-envelope-o"></i> Send a message</a>
-    </fieldset>
+    </div>
+            <a href="#" class="button" data-open="send-msg"><i class="fa fa-envelope-o fa-fw"></i> Send a message</a>
+
+    </div>
     </div> 
     
      
