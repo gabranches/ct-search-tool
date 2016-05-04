@@ -2,7 +2,7 @@
 <% include banner %>
 
 
-<div class="row details bump20" ng-controller="DetailsController">
+<div class="row details" ng-controller="DetailsController">
       <div class="small-12 medium-9 columns result">
     <a ng-click="goBack()" class="button button-back bump20"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> back to search results</a>
     <h3 class="bump20"><span ng-if="data.phase != 'N/A'">{{ data.phase }}: </span>{{ data.official_title }}</h3>
@@ -51,11 +51,14 @@
     
     
     </section>
-<<<<<<< HEAD
-    <fieldset ng-show="data.keywords.length > 0" class="fieldset">
-      <legend>Keywords</legend>
-      <span class="keyword" ng-repeat="keyword in data.keywords"><a href="/search-results/{{ encodeURI(keyword) }}">{{ keyword }}</a></span>
-    </fieldset>
+    </section>
+
+    <section class="result-part">
+        <div class="related">Keywords</div>
+              <span class="keyword" ng-repeat="keyword in data.keywords"><a href="/search-results/{{ encodeURI(keyword) }}">{{ keyword }}</a></span>
+
+       
+    </section>
     <fieldset class="fieldset">
       <legend>Did you find this description helpful?</legend>
       <div>
@@ -68,18 +71,7 @@
       <span ng-show="helpful == 1">Thank you for your input!</span>
       </div>
     </fieldset>
-=======
-    </section> 
-    
-    <section class="result-part">
-        <div class="related">Keywords</div>
-              <span class="keyword" ng-repeat="keyword in data.keywords"><a href="/search-results/{{ encodeURI(keyword) }}">{{ keyword }}</a></span>
 
-        <p></p>
-    </section>
-    
- 
->>>>>>> design
   
      </div>  
       <div class="small-12 medium-3 columns">

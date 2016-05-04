@@ -15,12 +15,12 @@ $dark-gray: #5d5d5d;
 
 $font-body: Helvetica Neue,Helvetica,Arial,sans-serif;
 
-
 body {
     font-family: $font-body;
     font-weight: 200;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    background: $light-gray;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -87,7 +87,6 @@ a {
     padding: 8px;
     background: #fff;
     position: absolute;
-//    margin-top: -38px;
 }
 
 .button-filter {
@@ -96,9 +95,14 @@ a {
     margin-top: 5px;
 }
 
+.details {
+    padding-top: 20px;
+    background: #fff;
+    border-left: 1px solid $mid-gray;
+    border-right: 1px solid $mid-gray;
+}
 
 #details {
-//    background: $screen;
     padding: 10px;
     
     h5 {
@@ -131,10 +135,6 @@ a {
 }
 
 // Gustavo's CSS
-
-//.search-term {
-//    margin-right: 15px;
-//}
 
 .keyword {
     margin-right: 15px;
@@ -188,9 +188,11 @@ a {
 
 .browse {
  padding-top: 20px;
-    background: $light-gray;
+    background: white;
     margin: auto;
     padding-bottom: 40px;
+    border-right: 1px $mid-gray solid;
+    border-left: 1px $mid-gray solid;
     
     .browse-categories {
         margin: auto;
@@ -257,7 +259,9 @@ h2 {
 
 .home-video {
     padding: 50px 0;
-    background-color: $light-gray;
+    background-color: white;
+    border-right: $mid-gray 1px solid;
+    border-left: $mid-gray 1px solid;
     
     .play {
         border-radius: 50%;
@@ -265,7 +269,7 @@ h2 {
 //        padding: 15px;
         height: 180px;
         width: 180px;
-        background-color: $light-gray;
+        background-color: white;
         font-size: 180px;
         line-height: 0;
         color: $mid-green;
@@ -305,8 +309,17 @@ footer {
         }}
 }
 
+.footer-top {
+    clear: both;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+}
+
 .results-page {
-    margin-top: 20px; 
+    padding-top: 20px; 
+    padding-bottom: 20px; 
+    background: white;
     h1 {
         color: $um-green;
         font-size: 36;
@@ -321,6 +334,7 @@ footer {
         color: $dark-gray;
     } 
 }
+
 
 .related {
         color: $um-orange;
@@ -362,6 +376,11 @@ footer {
     }
 }
 
+.alert {
+    background: #b20000;
+    color: white;
+}
+
 .last-updated {
     background: $light-gray;
     padding: 7px 15px;
@@ -370,10 +389,15 @@ footer {
 }
 
 .result {
-    h3 {
+    h3, h3 > a {
         font-family: $font-body;
         color: $dark-gray;
         font-size: 24px;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+        
     }
 }
 

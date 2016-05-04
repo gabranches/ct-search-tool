@@ -89,7 +89,7 @@
        
         <div class="small-12 columns">
          <h1>Search Results</h1>
-          <h5 class="results-for"><strong>{{ data.numMatches }} research studies</strong> found for <strong>{{ data.query }}</strong> and <strong>{{ filtered.length }} match your eligibility filters</strong></h5>
+          <h5 class="results-for"><strong>{{ data.numMatches }} research studies</strong> found for <strong>{{ data.query }}</strong> and <strong ng-class="filtered.length == 0 ? 'alert-box alert round' : ''">{{ filtered.length }} match your eligibility filters</strong></h5>
         </div>
       </div>
       
@@ -122,7 +122,9 @@
        </div>
     </div>
 </div>
-
+<div class="footer-top">
+     <a href="#top"><i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> Back to Top</a>
+ </div>
 <a class="exit-off-canvas"></a>
 
 </div>
