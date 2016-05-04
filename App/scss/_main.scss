@@ -200,6 +200,11 @@ a {
 //        border-right: 1px solid $um-orange;
         box-shadow: 1px 1px 1px rgba(#000, 0.6);
         
+        input[type='text']:focus {
+            border-color: $um-orange;
+                box-shadow: 0 0 5px lighten($um-orange. 5%);
+        }
+        
        .input-group {
         margin-top: 7px;
      
