@@ -31,23 +31,23 @@
     <div ng-repeat="official in data.overall_officials">
       <p>{{ official.last_name[0] }} ( {{ official.role[0] }} ) </p>
     </div>
-    <h5>Primary outcome measures</h5>
-    <ul ng-repeat="outcome in data.primary_outcome">
-      <li>{{ outcome.measure[0] }}
+    <h5 class="outcome-measure" >Primary outcome measures</h5>
+    <div ng-repeat="outcome in data.primary_outcome">
+        <div class="outcome-header">{{ outcome.measure[0] }}</div>
       <ul>
         <li>Time frame: {{ outcome.time_frame[0] }}
         <li>Safety issue: {{ outcome.safety_issue[0] }}
       </ul>
-    </ul>
+    </div>
 
-    <h5 ng-show="data.secondary_outcome.length > 0">Secondary outcome measures</h5>
-    <ul ng-repeat="outcome in data.secondary_outcome">
-      <li>{{ outcome.measure[0] }}
+    <h5 class="outcome-measure" ng-show="data.secondary_outcome.length > 0">Secondary outcome measures</h5>
+    <div ng-repeat="outcome in data.secondary_outcome">
+        <div class="outcome-header">{{ outcome.measure[0] }}</div>
       <ul>
         <li>Time frame: {{ outcome.time_frame[0] }}
         <li>Safety issue: {{ outcome.safety_issue[0] }}
       </ul>
-    </ul>
+    </div>
     
     
     </section>

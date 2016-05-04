@@ -104,6 +104,15 @@ a {
     width: 100%;
 }
 
+.outcome-header {
+    font-weight: bold;
+}
+
+.outcome-measure {
+    font-family: $font-body;
+    color: $um-orange;
+    font-size: 28px;
+}
 .details {
     padding-top: 20px;
     background: #fff;
