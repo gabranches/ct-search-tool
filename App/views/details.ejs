@@ -1,84 +1,86 @@
 <% include header %>
 <% include banner %>
 
-<div class="row details" ng-controller="DetailsController">
-      <div class="small-12 medium-9 columns">
-    <a href ng-click="goBack()"><i class="fa fa-backward"></i> back to search results</a>
-    <h4><span class="phase">{{ data.phase }}:</span> {{ data.official_title }}</h4>
-    
-    <p>{{ data.brief_summary }}</p>
-    <h4 class="underline">Eligibility</h4>
-    <h5>Age</h5>
-    <p>Minimum: {{ data.minimum_age }} <br />
-    Maximum: {{ data.maximum_age }} </p>
-    <h5>Gender</h5>
-    <p>{{ data.gender }}</p>
-    <h5>Accepting healthy volunteers</h5>
-    <p>{{ data.healthy_volunteers }}</p>
 
-    <h5>Criteria</h5>
-    <p style="white-space: pre;"> {{ data.inclusion_criteria }}</p>
+<div class="row details" ng-controller="DetailsController">
+      <div class="small-12 medium-9 columns result">
+    <a ng-click="goBack()" class="button button-back bump20"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> back to search results</a>
+    <h3 class="bump20"><span ng-if="data.phase != 'N/A'">{{ data.phase }}: </span>{{ data.official_title }}</h3>
+
+    
+    <p class="result-part">{{ data.brief_summary }}</p>
+    <section class="result-part">
+        <h4 class="related">Eligibility</h4>
+        <p><strong>Age:</strong> Minimum: {{ data.minimum_age }} <span ng-if="data.maximum_age != 'N/A'">& Maximum: {{ data.maximum_age }}</span> </p>
+        <p><strong>Gender: </strong>{{ data.gender }}</p>
+        <p><strong>Accepting healthy volunteers: </strong>{{ data.healthy_volunteers }}</p>
+
+        <p><strong>Criteria:</strong></p>
+    <p style="white-space: pre-line;"> {{ data.inclusion_criteria }}</p>
+    </section>
+    
     
    
-    <h5 class="underline expand-header" id="details-headers">Details
-<!--    <small class="float-right "><a class="small" id="expand">Expand</a></small>-->
-    <i class="fa fa-plus-circle float-right" id="details-icons"></i>
-    </h5> 
+    <section class="result-part">
+        <div class="related" id="details-headers">Technical Details
+    <i class="fa fa-plus-circle" id="details-icons"></i>
+    </div>
+    
     <section id="details">
     <h5 ng-show="data.overall_outcome.length > 0">Overall Officials</h5>
     <div ng-repeat="official in data.overall_officials">
       <p>{{ official.last_name[0] }} ( {{ official.role[0] }} ) </p>
     </div>
-    <h5>Primary outcome measures</h5>
-    <ul ng-repeat="outcome in data.primary_outcome">
-      <li>{{ outcome.measure[0] }}
+    <h5 class="outcome-measure" >Primary outcome measures</h5>
+    <div ng-repeat="outcome in data.primary_outcome">
+        <div class="outcome-header">{{ outcome.measure[0] }}</div>
       <ul>
         <li>Time frame: {{ outcome.time_frame[0] }}
         <li>Safety issue: {{ outcome.safety_issue[0] }}
       </ul>
-    </ul>
+    </div>
 
-    <h5 ng-show="data.secondary_outcome.length > 0">Secondary outcome measures</h5>
-    <ul ng-repeat="outcome in data.secondary_outcome">
-      <li>{{ outcome.measure[0] }}
+    <h5 class="outcome-measure" ng-show="data.secondary_outcome.length > 0">Secondary outcome measures</h5>
+    <div ng-repeat="outcome in data.secondary_outcome">
+        <div class="outcome-header">{{ outcome.measure[0] }}</div>
       <ul>
         <li>Time frame: {{ outcome.time_frame[0] }}
         <li>Safety issue: {{ outcome.safety_issue[0] }}
       </ul>
-    </ul>
+    </div>
     
     
     </section>
-    <fieldset ng-show="data.keywords.length > 0" class="fieldset">
-      <legend>Keywords</legend>
-      <span class="keyword" ng-repeat="keyword in data.keywords"><a href="/search-results/{{ encodeURI(keyword) }}">{{ keyword }}</a></span>
-    </fieldset>
-    <fieldset class="fieldset">
-      <legend>Did you find this description helpful?</legend>
-      <div>
-        <button style="width: 120px" href="#" ng-click="helpful = 1" ng-show="helpful != 0" class="button">Yes</button>
-        <button style="width: 120px" href="#" ng-click="helpful = 0" ng-show="helpful != 1" class="button">No</button>
-      </div>
-      <div>
-      <textarea placeholder="Please enter your comments or concerns here." type="textarea" ng-model="reason" ng-show="helpful == 0"></textarea>
-      <button class="button" ng-show="helpful == 0">Submit Feedback</button>
-      <span ng-show="helpful == 1">Thank you for your input!</span>
-      </div>
-    </fieldset>
+    </section>
+
+    <section class="result-part">
+        <div class="related">Keywords</div>
+              <span class="keyword" ng-repeat="keyword in data.keywords"><a href="/search-results/{{ encodeURI(keyword) }}">{{ keyword }}</a></span>
+
+       
+    </section>
+   
+
   
      </div>  
       <div class="small-12 medium-3 columns">
-    <fieldset ng-show="data.contact" class="fieldset" id="contact">
-        <legend>Contact Information</legend>
-        Email or leave a message for the research coordinator to see if this trials is right for you. 
-        <ul>
-            <li>{{ data.contact.first_name[0] }} {{ data.contact.last_name[0] }}</li>
-            <li ng-show="data.contact.phone[0]">Call {{ data.contact.phone[0] }}</li>
-            <li><a href="mailto:{{ data.contact.email[0] }}">{{ data.contact.email[0] }}</a></li>
+    <div ng-show="data.contact" class="contact-us" id="contact">
+        <div class="lead-gray">Contact Us</div>
+        <div class="contact-screen">
+            Call, email or leave a message for the research coordnator to see if this trial is right for you. 
+        </div>
+                  <div class="contact-info">
+                   <ul>
+            <li><i class="fa fa-user fa-fw" aria-hidden="true"></i> {{ data.contact.first_name[0] }} {{ data.contact.last_name[0] }}</li>
+            <li ng-show="data.contact.phone[0]"><i class="fa fa-phone fa-fw" aria-hidden="true"></i> Call {{ data.contact.phone[0] }}</li>
+            <li><i class="fa fa-envelope-o  fa-fw" aria-hidden="true"></i> <a href="mailto:{{ data.contact.email[0] }}">{{ data.contact.email[0] }}</a></li>
         </ul>
-        <a href="#" class="button" data-open="send-msg"><i class="fa fa-envelope-o"></i> Send a message</a>
-    </fieldset>
-    </div>  
+    </div>
+            <a href="#" class="button" data-open="send-msg"><i class="fa fa-envelope-o fa-fw"></i> Send a message</a>
+
+    </div>
+    </div>
+       
 </div>
     <div class="reveal" id="send-msg" data-reveal ng-controller="DetailsController">
         <h3>Send a message</h3>
@@ -135,7 +137,30 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
+<div class="row">
+     <div class="fieldset-helpful">
+     <div class="help-intro">We are constantly trying to improve our clinical research pages, please help us improve this page by leaving feedback below.</div>
+     <div class="help-form">
+      <strong ng-hide="helpful == 0 || helpful == 1">Was this clinical research description helpful??</strong>
+      <div>
+        <button style="width: 120px" href="#" ng-click="helpful = 1" ng-hide="helpful == 0 || helpful == 1" class="button">Yes</button>
+        <button style="width: 120px" href="#" ng-click="helpful = 0" ng-hide="helpful == 0 || helpful == 1"  class="button">No</button>
+      </div>
+      <div>
+    
+      <textarea placeholder="Please enter your comments or concerns here." type="textarea" ng-model="reason" ng-show="helpful == 0" rows="5"></textarea>
+      <button class="button" ng-show="helpful == 0">Submit Feedback</button>
+      <div ng-show="helpful == 0">
+          Feedback is anonymous and no personal data will be collected, if you have a question about the research iteself, please use our <a data-open="send-msg">contact form</a>.
+      </div>
+      <strong ng-show="helpful == 1">Thank you for your feedback!</strong>
+      </div>
+    </div>
+    </div>
+    <div class="footer-top">
+     <a href="#top"><i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> Back to Top</a>
+ </div>
+</div>
 <script>
   var data = <%- JSON.stringify(data) %>;
 </script>
