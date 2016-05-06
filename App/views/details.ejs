@@ -19,11 +19,11 @@
     <p style="white-space: pre-line;"> {{ data.inclusion_criteria }}</p>
     </section>
     
-    <section class="result-part">
-         <h4 class="related">Detailed Description</h4>
-         <p>
+    <section class="result-part" ng-show="data.detailed_description">
+         <div class="related" id="description-headers">Detailed Description <i class="fa fa-plus-circle" id="description-icons"></i></div>
+         <section id="detailed-description">
              {{ data.detailed_description }}
-         </p>
+         </section>
           </section>
    
     <section class="result-part">
@@ -58,7 +58,7 @@
     </section>
     </section>
 
-    <section class="result-part">
+    <section class="result-part" ng-show="data.keywords">
         <div class="related">Keywords</div>
               <span class="keyword" ng-repeat="keyword in data.keywords"><a href="/search-results/{{ encodeURI(keyword) }}">{{ keyword }}</a></span>
 

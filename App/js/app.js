@@ -8,6 +8,7 @@ $('#youtube')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stop
 
 
 $('#details').slideUp();
+$('#detailed-description').slideUp();
 
 $("#details-headers").click(function(){
     if($('#details-icons').hasClass('fa-plus-circle')){
@@ -17,6 +18,18 @@ $("#details-headers").click(function(){
     } else {
         $('#details-icons').removeClass('fa-minus-circle').addClass('fa-plus-circle');
         $('#details').slideUp();
+        console.log("less");
+    }
+})
+
+$("#description-headers").click(function(){
+    if($('#description-icons').hasClass('fa-plus-circle')){
+        $('#description-icons').removeClass('fa-plus-circle').addClass('fa-minus-circle');
+        $('#detailed-description').slideDown();
+        console.log("more");
+    } else {
+        $('#description-icons').removeClass('fa-minus-circle').addClass('fa-plus-circle');
+        $('#detailed-description').slideUp();
         console.log("less");
     }
 })
