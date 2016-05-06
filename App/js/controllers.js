@@ -23,10 +23,10 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
 
 
     $scope.filters.phases = {
-        'Phase 1': true,
-        'Phase 2': true,
-        'Phase 3': true,
-        'Phase 4': true,
+        'Phase 1': false,
+        'Phase 2': false,
+        'Phase 3': false,
+        'Phase 4': false,
         'N/A': true
     }
 
@@ -45,11 +45,45 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
 
 
     phaseFilter = function(study) {
-        if ($scope.filters.phases.hasOwnProperty(study.phase)) {
-            return $scope.filters.phases[study.phase];
+        
+        for (phase in $scope.filters.phases) {
+            // If filter set to true
+            if($scope.filters.phases[phase]) {
+
+                // Return true for "N/A"
+                if (phase === 'N/A') return true;
+
+                // Return true if match is found
+                var regex = new RegExp(phase, "i");
+                if (study.phase.match(regex)) {
+                    return true
+                }
+            }
         }
-        return true;
+
+        return false;
+
     }
+
+    // Handle phase filter automatic unchecking
+    $(".phase_num").click(function() {
+    if($(this).prop("checked")) {
+        $(".phase_all").prop("checked", false);
+        $scope.filters.phases['N/A'] = false;
+        }
+    });
+
+    // Handle phase filter automatic unchecking
+    $(".phase_all").click(function() {
+        if($(this).prop("checked")) {
+            $(".phase_num").prop("checked", false);
+            $scope.filters.phases['Phase 1'] = false;
+            $scope.filters.phases['Phase 2'] = false;
+            $scope.filters.phases['Phase 3'] = false;
+            $scope.filters.phases['Phase 4'] = false;
+        }
+    });
+
 
     healthFilter = function(study) {
         if ($scope.filters.health.hasOwnProperty(study.health)) {
@@ -146,10 +180,18 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
             $(this).prop('checked', true);
         });
 
+        // Select 'all' for phases
+        $(".phase_all").prop("checked", true);
+        $(".phase_num").prop("checked", false);
+        $scope.filters.phases['N/A'] = true;
+        $scope.filters.phases['Phase 1'] = false;
+        $scope.filters.phases['Phase 2'] = false;
+        $scope.filters.phases['Phase 3'] = false;
+        $scope.filters.phases['Phase 4'] = false;
+
         // Reset filters
         setAll($scope.filters.age, true);
         setAll($scope.filters.health, true);
-        setAll($scope.filters.phases, true);
         $scope.lastUpdated = "0";
 
         // Update filters

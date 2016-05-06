@@ -53,17 +53,29 @@ $('#copy').click(function() {
 
 var app = angular.module('app', [])
 
+
 // EVENT LISTENERS
 
+// Submit search on button click
 $('.input-group-button').click(function() {
     var searchParam = encodeURIComponent($(this).parent().find('.input-group-field').val());
     redirect('/search-results', '/' + searchParam);    
 });
 
+// Submit search on enter key press
+$('.input-group-field').keypress(function (e) {
+    if (e.which == 13) {
+        var searchParam = encodeURIComponent($(this).parent().find('.input-group-field').val());
+        redirect('/search-results', '/' + searchParam);   
+    }
+})
+
+// Redirect to search page when clicking on a keyword
 $('.search-term').click(function() {
     var searchParam = encodeURIComponent($(this).find('a').val());
     redirect('/search-results', '/' + searchParam);    
 });
+
 
 // FUNCTIONS
 
@@ -89,10 +101,12 @@ function setAll(object, value) {
     }
 }
 
-
 $(".radio-group input").change(function() { 
     if ($(this).is(":checked")) { 
         $(this).parent().siblings().css("border", "1px solid white");
         $(this).parent().css("border", "1px solid #f17327"); 
     }
 });
+
+
+
