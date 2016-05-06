@@ -180,10 +180,18 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
             $(this).prop('checked', true);
         });
 
+        // Select 'all' for phases
+        $(".phase_all").prop("checked", true);
+        $(".phase_num").prop("checked", false);
+        $scope.filters.phases['N/A'] = true;
+        $scope.filters.phases['Phase 1'] = false;
+        $scope.filters.phases['Phase 2'] = false;
+        $scope.filters.phases['Phase 3'] = false;
+        $scope.filters.phases['Phase 4'] = false;
+
         // Reset filters
         setAll($scope.filters.age, true);
         setAll($scope.filters.health, true);
-        setAll($scope.filters.phases, true);
         $scope.lastUpdated = "0";
 
         // Update filters
