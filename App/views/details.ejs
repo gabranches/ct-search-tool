@@ -19,7 +19,12 @@
     <p style="white-space: pre-line;"> {{ data.inclusion_criteria }}</p>
     </section>
     
-    
+    <section class="result-part">
+         <h4 class="related">Detailed Description</h4>
+         <p>
+             {{ data.detailed_description }}
+         </p>
+          </section>
    
     <section class="result-part">
         <div class="related" id="details-headers">Technical Details
@@ -73,7 +78,7 @@
                    <ul>
             <li><i class="fa fa-user fa-fw" aria-hidden="true"></i> {{ data.contact.first_name[0] }} {{ data.contact.last_name[0] }}</li>
             <li ng-show="data.contact.phone[0]"><i class="fa fa-phone fa-fw" aria-hidden="true"></i> Call {{ data.contact.phone[0] }}</li>
-            <li><i class="fa fa-envelope-o  fa-fw" aria-hidden="true"></i> <a href="mailto:{{ data.contact.email[0] }}">{{ data.contact.email[0] }}</a></li>
+            <li><i class="fa fa-envelope fa-fw" aria-hidden="true"></i> <a href="mailto:{{ data.contact.email[0] }}">{{ data.contact.email[0] }}</a></li>
         </ul>
     </div>
             <a href="#" class="button" data-open="send-msg"><i class="fa fa-envelope-o fa-fw"></i> Send a message</a>
@@ -138,9 +143,9 @@
         </button>
       </div>
 <div class="row">
-     <div class="fieldset-helpful">
-     <div class="help-intro">We are constantly trying to improve our clinical research pages, please help us improve this page by leaving feedback below.</div>
-     <div class="help-form">
+     <div class="fieldset-helpful text-center">
+     <div class="help-intro text-center">We are constantly trying to improve our clinical research pages, please help us improve this page by leaving feedback below.</div>
+     <div class="help-form text-center">
       <strong ng-hide="helpful == 0 || helpful == 1">Was this clinical research description helpful??</strong>
       <div>
         <button style="width: 120px" href="#" ng-click="helpful = 1" ng-hide="helpful == 0 || helpful == 1" class="button">Yes</button>

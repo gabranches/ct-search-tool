@@ -23,6 +23,14 @@ body {
     background: $light-gray;
 }
 
+@media screen and (min-width: 64em){
+.position-left.reveal-for-large ~ .off-canvas-content {
+    margin-left: 266px;
+}
+}
+
+
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Georgia', serif;
 }
@@ -38,6 +46,7 @@ a {
 
 .button {
     text-decoration: none ;
+    background-color: $um-green;
 }
 
 .bump9 { margin-top: 9px;}
@@ -192,8 +201,7 @@ a {
 
     .hero-search {
         background: rgba($um-orange, 0.8);
-        padding: 10px 5px;
-        padding-right: 10px;
+        padding: 12px;
 //        border-bottom: 1px solid $um-orange;
 //        border-right: 1px solid $um-orange;
         box-shadow: 1px 1px 1px rgba(#000, 0.6);
@@ -204,7 +212,9 @@ a {
         }
         
        .input-group {
-        margin-top: 7px;
+//        margin-top: 7px;
+           margin-bottom: 2px;
+               margin-top: 2px;
      
         }
        
@@ -332,10 +342,11 @@ background: rgba($um-orange, 1);
     background-color: $highlight;
     border-right: $mid-gray 1px solid;
     border-left: $mid-gray 1px solid;
-    height: 60px;
+    height: 100px;
+    padding: 30px 0;
     @media screen and (min-width: 40em) {
     background-color: white;
-//        padding: 40px 0;
+        padding: 40px 0;
     }
     
     .play {
@@ -370,7 +381,7 @@ background: rgba($um-orange, 1);
         @media screen and (min-width: 40em) {
 //            height: 25px;
             font-size: 1.2em;
-            padding: 5px;
+//            padding: 5px;
 //            padding-bottom: 20px;
         }
         
@@ -475,10 +486,14 @@ footer {
 }
 
 .alert {
-    background: #b20000;
+    background: $um-orange;
     color: white;
     display: inline-block;
     padding: 2px 5px;
+}
+
+.callout.warning {
+    background-color: $light-orange;
 }
 
 .last-updated {
@@ -524,13 +539,13 @@ footer {
         .help-intro {
             width: 80%;
             margin: auto;
-            text-align: left;
+//            text-align: left;
             margin-bottom: 10px;
         }
         .help-form {
             width: 80%;
             margin: auto;
-            text-align: left;
+//            text-align: left;
         }
         .button {
             background: $um-green;
@@ -558,8 +573,13 @@ footer {
         background-color: $um-orange;
         padding: 10px;
         color: white;
+        font-weight: bold;
     }
 
+    .reset {
+        margin-top: 6px; 
+        text-decoration: none;
+    }
     
 
     
