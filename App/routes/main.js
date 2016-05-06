@@ -45,7 +45,8 @@ module.exports = function(app, root) {
                 primary_outcome: 'primary_outcome',
                 secondary_outcome: 'secondary_outcome',
                 keywords: 'keyword',
-                contact: 'overall_contact.0'
+                contact: 'overall_contact.0',
+                detailed_description: 'detailed_description.0.textblock.0'
             }
         );
 
