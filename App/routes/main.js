@@ -50,13 +50,12 @@ module.exports = function(app, root) {
             }
         );
 
-
-
         res.render('details', {
                 data: results
         });
 
     });
+
 
     // ** SEARCH RESULTS PAGE ** //
     
@@ -65,7 +64,36 @@ module.exports = function(app, root) {
         console.time('query');
 
         var query = decodeURIComponent(req.params.query);
+
+        searchResultQuery(query, function(results, synArr) {
+            res.render('search-results', {
+                data: {
+                    query: query,
+                    related: synArr,
+                    numMatches: results.length,
+                    results: results
+                }
+            });
+        });
+    });  
+
+
+    // ** SEARCH RESULTS JSON ** //
+
+    app.get('/search-results/:query/.json', function(req, res) {
+
+        console.time('query');
+
+        var query = decodeURIComponent(req.params.query);
         
+        searchResultQuery(query, function(results, synArr) {
+            res.json(results);
+        });
+    });
+
+
+    function searchResultQuery(query, callback) {
+
         searchUtils.getSynonyms(query, function(synArr) {
 
             console.log('Query: ' + query);
@@ -109,23 +137,10 @@ module.exports = function(app, root) {
 
             // Render the page and pass in data
             console.log('Sending data...');
-            res.render('search-results', {
-                data: {
-                    query: query,
-                    related: synArr,
-                    numMatches: results.length,
-                    results: results
-                }
-            });
+            callback(results, synArr);
         });
-    });    
+    } 
 };
 
 
-
-
 var fs = require('fs');
-
-
-
-
