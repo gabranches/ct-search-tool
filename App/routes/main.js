@@ -15,45 +15,30 @@ module.exports = function(app, root) {
         res.render('index');
     });
 
+
     // ** DETAILS PAGE **//
 
     app.get('/details/:nct', function(req, res) {
 
         var nct = decodeURIComponent(req.params.nct);
 
-        var matches = searchUtils.search(studies, [nct],
-            [
-                'id_info.0.nct_id.0'
-            ]
-        );
-
-        var results = searchUtils.getResults(studies, matches, 
-
-            // Enter below the objects of interest in the JSON tree
-            { 
-                nct_id: 'id_info.0.nct_id.0',
-                url: 'required_header.0.url.0',
-                official_title: 'official_title.0',
-                phase: 'phase.0',
-                brief_summary: 'brief_summary.0.textblock.0',
-                healthy_volunteers: 'eligibility.0.healthy_volunteers.0',
-                gender: 'eligibility.0.gender.0',
-                inclusion_criteria: 'eligibility.0.criteria.0.textblock.0',
-                minimum_age: 'eligibility.0.minimum_age.0',
-                maximum_age: 'eligibility.0.maximum_age.0',
-                overall_officials: 'overall_official',
-                primary_outcome: 'primary_outcome',
-                secondary_outcome: 'secondary_outcome',
-                keywords: 'keyword',
-                contact: 'overall_contact.0',
-                detailed_description: 'detailed_description.0.textblock.0'
-            }
-        );
-
-        res.render('details', {
-                data: results
+        detailsQuery(nct, function(results) {
+            res.render('details', {
+                    data: results
+            });
         });
+    });
 
+
+    // ** DETAILS JSON **//
+
+    app.get('/details/:nct/.json', function(req, res) {
+
+        var nct = decodeURIComponent(req.params.nct);
+
+        detailsQuery(nct, function(results) {
+            res.json(results);
+        });
     });
 
 
@@ -90,6 +75,40 @@ module.exports = function(app, root) {
             res.json(results);
         });
     });
+
+
+    function detailsQuery(nct, callback) {
+        var matches = searchUtils.search(studies, [nct],
+            [
+                'id_info.0.nct_id.0'
+            ]
+        )
+
+        var results = searchUtils.getResults(studies, matches, 
+
+            // Enter below the objects of interest in the JSON tree
+            { 
+                nct_id: 'id_info.0.nct_id.0',
+                url: 'required_header.0.url.0',
+                official_title: 'official_title.0',
+                phase: 'phase.0',
+                brief_summary: 'brief_summary.0.textblock.0',
+                healthy_volunteers: 'eligibility.0.healthy_volunteers.0',
+                gender: 'eligibility.0.gender.0',
+                inclusion_criteria: 'eligibility.0.criteria.0.textblock.0',
+                minimum_age: 'eligibility.0.minimum_age.0',
+                maximum_age: 'eligibility.0.maximum_age.0',
+                overall_officials: 'overall_official',
+                primary_outcome: 'primary_outcome',
+                secondary_outcome: 'secondary_outcome',
+                keywords: 'keyword',
+                contact: 'overall_contact.0',
+                detailed_description: 'detailed_description.0.textblock.0'
+            }
+        )
+
+        callback(results);
+    }
 
 
     function searchResultQuery(query, callback) {
