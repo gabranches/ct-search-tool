@@ -13,8 +13,3 @@ fs.rename('./data/data-drop/output.xml', './data/output.xml', function(err) {
         utils.saveFile('./data/output.json', JSON.stringify(jsonData));
     });
 });
-
-
-
-
-
