@@ -8,6 +8,8 @@ var util = require('util');
 
 module.exports = function(app, root) {
 
+    console.log('App is running.');
+
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     
