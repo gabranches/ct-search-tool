@@ -1,10 +1,8 @@
-
 var searchUtils = require('../lib/search-utils');
 var bodyParser = require('body-parser');
 var data = require('../data/output.json');
 var studies = data.studies.clinical_study;
 var util = require('util');
-
 
 module.exports = function(app, root) {
 
@@ -16,7 +14,6 @@ module.exports = function(app, root) {
     app.get('/', function(req, res) {       
         res.render('index');
     });
-
 
     // ** DETAILS PAGE **//
 
@@ -31,7 +28,6 @@ module.exports = function(app, root) {
         });
     });
 
-
     // ** DETAILS JSON **//
 
     app.get('/details/:nct/.json', function(req, res) {
@@ -42,7 +38,6 @@ module.exports = function(app, root) {
             res.json(results);
         });
     });
-
 
     // ** SEARCH RESULTS PAGE ** //
     
@@ -64,7 +59,6 @@ module.exports = function(app, root) {
         });
     });  
 
-
     // ** SEARCH RESULTS JSON ** //
 
     app.get('/search-results/:query/.json', function(req, res) {
@@ -77,7 +71,6 @@ module.exports = function(app, root) {
             res.json(results);
         });
     });
-
 
     function detailsQuery(nct, callback) {
         var matches = searchUtils.search(studies, [nct],
@@ -111,7 +104,6 @@ module.exports = function(app, root) {
 
         callback(results);
     }
-
 
     function searchResultQuery(query, callback) {
 
@@ -162,6 +154,5 @@ module.exports = function(app, root) {
         });
     } 
 };
-
 
 var fs = require('fs');

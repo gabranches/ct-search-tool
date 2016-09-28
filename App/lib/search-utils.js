@@ -252,7 +252,7 @@ var self = module.exports = {
     /**
      * Saves a file to the file system
      * 
-     * @params {string} filepath    - The location of the xml file
+     * @params {string} filepath    - The location of the file
      * @params {function} callback  - A callback function
      */
     
