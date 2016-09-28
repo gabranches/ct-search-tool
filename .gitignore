@@ -1,8 +1,9 @@
 .DS_Store
-App/bower_components
-App/node_modules/
-App/npm-debug.log
-App/css
-App/data/wordnet.db
-
+bower_components
+node_modules
 npm-debug.log
+css/
+data/wordnet.db
+npm-debug.log
+solr-6.2.1
+
