@@ -20,8 +20,6 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
 
     $scope.filters = {}
 
-
-
     $scope.filters.phases = {
         'Phase 1': false,
         'Phase 2': false,

@@ -4,11 +4,23 @@ var data = require('../data/output.json');
 var studies = data.studies.clinical_study;
 var util = require('util');
 
+// Specify core options here
+var options = {
+    core: 'ct-search-tool',
+    solrVersion: '6.2.1'
+}
+
+// Initiate solr client
+var solr = require('solr-client');
+var client = solr.createClient(options);
+
 module.exports = function(app, root) {
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
-    
+
+    // ** MAIN PAGE ** //
+
     app.get('/', function(req, res) {       
         res.render('index');
     });
@@ -71,82 +83,52 @@ module.exports = function(app, root) {
     });
 
     function detailsQuery(nct, callback) {
-        var matches = searchUtils.search(studies, [nct],
-            [
-                'id_info.0.nct_id.0'
-            ]
-        )
 
-        var results = searchUtils.getResults(studies, matches, 
+        var query = client.createQuery()
+            .q({ ncd_id: nct })
+            .start(0)
+            .rows(1);
 
-            // Enter below the objects of interest in the JSON tree
-            { 
-                nct_id: 'id_info.0.nct_id.0',
-                url: 'required_header.0.url.0',
-                official_title: 'official_title.0',
-                phase: 'phase.0',
-                brief_summary: 'brief_summary.0.textblock.0',
-                healthy_volunteers: 'eligibility.0.healthy_volunteers.0',
-                gender: 'eligibility.0.gender.0',
-                inclusion_criteria: 'eligibility.0.criteria.0.textblock.0',
-                minimum_age: 'eligibility.0.minimum_age.0',
-                maximum_age: 'eligibility.0.maximum_age.0',
-                overall_officials: 'overall_official',
-                primary_outcome: 'primary_outcome',
-                secondary_outcome: 'secondary_outcome',
-                keywords: 'keyword',
-                contact: 'overall_contact.0',
-                detailed_description: 'detailed_description.0.textblock.0'
+        client.search(query, function (err, obj) {
+            if (err) {
+                console.log(err);
+            } else {
+                callback(obj.response.docs)
             }
-        )
+        });
 
         callback(results);
     }
 
-    function searchResultQuery(query, callback) {
+    /**
+     * Performs a search using a search term
+     * 
+     * @param {term} string - A search term
+     * @param {function} callback - A callback function that takes the 
+     *      results of the query as an argument
+     */
 
-        searchUtils.getSynonyms(query, function(synArr) {
+    function searchResultQuery(term, callback) {
 
-            console.log('Query: ' + query);
-            console.log('Synonyms: ' + synArr);
-            console.log('Getting matches...');
-            var matches = searchUtils.search(studies, synArr,
+        var query = client.createQuery()
+              .q('*' + term + '*')
+              .edismax()
+              .start(0)
+              .rows(1000)
+              .qf({
+                  keywords : 5,
+                  brief_title : 10,
+                  official_title : 5,
+                  brief_summary : 3,
+                  detailed_description : 2
+                });
 
-                // Enter below the fields in the JSON tree to be searched
-                [
-                    'brief_title.0',
-                    'official_title.0', 
-                    'detailed_description.0.textblock.0',
-                    'keyword'
-                ]       
-            );
-            
-            console.log('Getting results...');
-            var results = searchUtils.getResults(studies, matches, 
-
-                // Enter below the objects of interest in the JSON tree
-                { 
-                    nct_id: 'id_info.0.nct_id.0',
-                    url: 'required_header.0.url.0',
-                    brief_title: 'brief_title.0',
-                    phase: 'phase.0',
-                    brief_summary: 'brief_summary.0.textblock.0',
-                    keywords: 'keyword',
-                    last_updated: 'lastchanged_date.0',
-                    health: 'eligibility.0.healthy_volunteers.0',
-                    minimum_age: 'eligibility.0.minimum_age.0',
-                    maximum_age: 'eligibility.0.maximum_age.0',
-                    gender: 'eligibility.0.gender.0',
-                    official_title: 'official_title.0',
-                    detailed_description: 'detailed_description.0.textblock.0'
-                }
-            );
-            
-            var results = searchUtils.getSearchScore(results, synArr);
-
-            // Render the page and pass in data
-            console.log('Sending data...');
-            callback(results, synArr);
+        client.search(query, function (err,obj) {
+            if (err) {
+                console.log(err);
+            } else {
+                callback(obj.response.docs)
+            }
         });
     } 
 };
