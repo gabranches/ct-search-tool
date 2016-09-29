@@ -82,10 +82,18 @@ module.exports = function(app, root) {
         });
     });
 
+    /**
+     * Finds a study using the nct ID
+     * 
+     * @param {term} nct - The nct ID
+     * @param {function} callback - A callback function that takes the 
+     *      results of the query as an argument
+     */
+
     function detailsQuery(nct, callback) {
 
         var query = client.createQuery()
-            .q({ ncd_id: nct })
+            .q({ nct_id: nct })
             .start(0)
             .rows(1);
 
@@ -96,8 +104,6 @@ module.exports = function(app, root) {
                 callback(obj.response.docs)
             }
         });
-
-        callback(results);
     }
 
     /**
