@@ -33,6 +33,7 @@
     "express": "^4.13.4",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
+    "request": "^2.75.0",
     "solr": "^0.3.0",
     "solr-client": "^0.6.0",
     "wordnet-magic": "^0.3.0",

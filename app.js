@@ -10,3 +10,4 @@ app.set('view engine', 'ejs');
 routes(app, __dirname);
 
 app.listen(port);
+console.log('App is running on port ' + port);

@@ -6,8 +6,6 @@ var util = require('util');
 
 module.exports = function(app, root) {
 
-    console.log('App is running.');
-
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     
@@ -145,8 +143,6 @@ module.exports = function(app, root) {
             );
             
             var results = searchUtils.getSearchScore(results, synArr);
-
-            // console.log(util.inspect(results));
 
             // Render the page and pass in data
             console.log('Sending data...');
