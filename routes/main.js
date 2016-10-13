@@ -117,7 +117,7 @@ module.exports = function(app, root) {
     function searchResultQuery(term, callback) {
 
         var query = client.createQuery()
-              .q('*' + term + '*')
+              .q('"' + term + '"')
               .edismax()
               .start(0)
               .rows(1000)
