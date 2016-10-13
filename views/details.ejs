@@ -24,7 +24,7 @@
                 <i class="fa fa-plus-circle" id="details-icons"></i>
             </div>
             <section id="details">
-                <h5 ng-show="data.overall_outcome.length > 0">Overall Officials</h5>
+                <h5 ng-show="data.overall_officials.length > 0">Overall Officials</h5>
                 <div ng-repeat="official in data.overall_officials">
                     <p>{{ official.last_name[0] }} ( {{ official.role[0] }} ) </p>
                 </div>

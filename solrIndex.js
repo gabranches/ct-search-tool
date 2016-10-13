@@ -19,17 +19,19 @@ var map = {
     'lastchanged_date.0'                        : 'last_updated',
     'overall_contact.0'                         : 'contact',
     'detailed_description.0.textblock.0'        : 'detailed_description',
-    'brief_title.0'                             : 'brief_title'
-    // 'overall_officials'                         : 'overall_officials',
-    // 'primary_outcome'                           : 'primary_outcome',
-    // 'secondary_outcome'                         : 'secondary_outcome',
+    'brief_title.0'                             : 'brief_title',
+    'overall_official'                          : 'overall_officials',
+    'primary_outcome'                           : 'primary_outcome'
+    // 'secondary_outcome'                         : 'secondary_outcome'
 }
 
+
+var dynamicFields = ['overall_officials', 'primary_outcome', 'secondary_outcome'];
 var studiesFlattened = [];
 
 // Flatten each study
 for (study in studies) {
-    studiesFlattened.push(jsonUtils.flatten(studies[study], map));
+    studiesFlattened.push(jsonUtils.flatten(studies[study], map, dynamicFields));
 }
 
 // Index changes in solr

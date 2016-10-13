@@ -221,6 +221,8 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
 }]);
 
 app.controller('DetailsController', ['$scope', 'myUtils', function($scope, myUtils) {
+    data[0].overall_officials = JSON.parse(data[0].overall_officials);
+    data[0].primary_outcome = JSON.parse(data[0].primary_outcome);
     $scope.data = data[0];
 
     // Replace this for the contact information if there isn't any
@@ -232,6 +234,8 @@ app.controller('DetailsController', ['$scope', 'myUtils', function($scope, myUti
             email: ['testemail@miami.edu']
         };
     }
+
+    console.log($scope.data);
 
     // If there is no last name, replace it with "Primary Contact"
     if ($scope.data.contact.last_name[0]) {
