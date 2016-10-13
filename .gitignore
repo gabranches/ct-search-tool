@@ -6,3 +6,5 @@ css/
 data/wordnet.db
 npm-debug.log
 solr-6.2.1
+data/output.xml
+data/output.json

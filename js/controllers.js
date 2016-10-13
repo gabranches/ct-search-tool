@@ -1,16 +1,16 @@
 // CONTROLLERS
 
-app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', function($scope, $timeout, myUtils) {
+app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', function ($scope, $timeout, myUtils) {
 
     $scope.showResults = true;
     $scope.lastUpdated = "0";
 
-    $scope.hideResults = function() {
+    $scope.hideResults = function () {
         $scope.showResults = false;
-        $timeout( function(){
-            $scope.showResults = true; 
+        $timeout(function () {
+            $scope.showResults = true;
         }, 500);  // artificial wait of 1/2 second
-    }    
+    }
 
     $scope.data = data;
 
@@ -42,11 +42,11 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
     $scope.filters.gender = 'Both';
 
 
-    phaseFilter = function(study) {
-        
+    phaseFilter = function (study) {
+
         for (phase in $scope.filters.phases) {
             // If filter set to true
-            if($scope.filters.phases[phase]) {
+            if ($scope.filters.phases[phase]) {
 
                 // Return true for "N/A"
                 if (phase === 'N/A') return true;
@@ -58,22 +58,20 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
                 }
             }
         }
-
         return false;
-
     }
 
     // Handle phase filter automatic unchecking
-    $(".phase_num").click(function() {
-    if($(this).prop("checked")) {
-        $(".phase_all").prop("checked", false);
-        $scope.filters.phases['N/A'] = false;
+    $(".phase_num").click(function () {
+        if ($(this).prop("checked")) {
+            $(".phase_all").prop("checked", false);
+            $scope.filters.phases['N/A'] = false;
         }
     });
 
     // Handle phase filter automatic unchecking
-    $(".phase_all").click(function() {
-        if($(this).prop("checked")) {
+    $(".phase_all").click(function () {
+        if ($(this).prop("checked")) {
             $(".phase_num").prop("checked", false);
             $scope.filters.phases['Phase 1'] = false;
             $scope.filters.phases['Phase 2'] = false;
@@ -83,14 +81,14 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
     });
 
 
-    healthFilter = function(study) {
+    healthFilter = function (study) {
         if ($scope.filters.health.hasOwnProperty(study.health)) {
             return $scope.filters.health[study.health];
         }
         return true;
     }
 
-    ageFilter = function(study) {
+    ageFilter = function (study) {
         if (study.hasOwnProperty('minimum_age')) {
             var minAge = getAge(study.minimum_age);
         }
@@ -109,9 +107,9 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
         return $scope.filters.age[ageType];
     }
 
-    genderFilter = function(study) {
+    genderFilter = function (study) {
         if (study.hasOwnProperty('gender')) {
-            
+
             // Return true if radio button set to "Both"
             if ($scope.filters.gender === 'Both') {
                 return true;
@@ -131,19 +129,16 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
         }
     }
 
-    lastUpdatedFilter = function(study) {
-
+    lastUpdatedFilter = function (study) {
         if ($scope.lastUpdated == 0) return true;
-
         var now = new Date().getTime();
         var date = new Date(study.last_updated).getTime();
         var updateUTC = $scope.lastUpdated * 24 * 60 * 60 * 1000;
-
         return (now - date < updateUTC);
     }
 
 
-    $scope.combinedFilter = function(study) {
+    $scope.combinedFilter = function (study) {
 
 
         var health = healthFilter(study);
@@ -166,15 +161,15 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
 
         return state;
     }
-    
+
     $scope.resetFilters = function () {
-        
+
         // Reset radio buttons
         $("#both").prop("checked", true);
         $scope.filters.gender = 'Both';
 
         // Check all checkboxes
-        $("#offCanvas").find("input:checkbox").each(function() {
+        $("#offCanvas").find("input:checkbox").each(function () {
             $(this).prop('checked', true);
         });
 
@@ -200,8 +195,8 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
 
     $scope.sortType = 'relevance';
 
-    $scope.sortFunction = function(study) {
-        
+    $scope.sortFunction = function (study) {
+
         var date = new Date(study.last_updated);
 
         switch ($scope.sortType) {
@@ -220,9 +215,19 @@ app.controller('SearchResultsController', ['$scope', '$timeout', 'myUtils', func
 
 }]);
 
-app.controller('DetailsController', ['$scope', 'myUtils', function($scope, myUtils) {
-    data[0].overall_officials = JSON.parse(data[0].overall_officials);
-    data[0].primary_outcome = JSON.parse(data[0].primary_outcome);
+app.controller('DetailsController', ['$scope', 'myUtils', function ($scope, myUtils) {
+
+    // Parse the dynamic fields
+    if (data[0].overall_officials) {
+        data[0].overall_officials = JSON.parse(data[0].overall_officials);
+    }
+    if (data[0].primary_outcome) {
+        data[0].primary_outcome = JSON.parse(data[0].primary_outcome);
+    }
+    if (data[0].secondary_outcome) {
+        data[0].secondary_outcome = JSON.parse(data[0].secondary_outcome);
+    }
+
     $scope.data = data[0];
 
     // Replace this for the contact information if there isn't any
@@ -235,8 +240,6 @@ app.controller('DetailsController', ['$scope', 'myUtils', function($scope, myUti
         };
     }
 
-    console.log($scope.data);
-
     // If there is no last name, replace it with "Primary Contact"
     if ($scope.data.contact.last_name[0]) {
         if ($scope.data.contact.last_name[0].indexOf("Use link") != -1) {
@@ -245,10 +248,8 @@ app.controller('DetailsController', ['$scope', 'myUtils', function($scope, myUti
     }
 
     $scope.helpful = 'undefined';
-
     $scope.replaceNewlines = myUtils.replaceNewlines;
     $scope.encodeURI = myUtils.encodeURI;
-
     $scope.goBack = myUtils.goBack;
 
 }]);

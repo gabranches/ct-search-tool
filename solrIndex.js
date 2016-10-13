@@ -21,8 +21,8 @@ var map = {
     'detailed_description.0.textblock.0'        : 'detailed_description',
     'brief_title.0'                             : 'brief_title',
     'overall_official'                          : 'overall_officials',
-    'primary_outcome'                           : 'primary_outcome'
-    // 'secondary_outcome'                         : 'secondary_outcome'
+    'primary_outcome'                           : 'primary_outcome',
+    'secondary_outcome'                         : 'secondary_outcome'
 }
 
 
