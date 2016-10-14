@@ -69,8 +69,7 @@ module.exports = function (app, root) {
         });
     });
 
-    
-};
 
+};
 
 var fs = require('fs');

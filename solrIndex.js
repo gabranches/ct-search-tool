@@ -3,7 +3,7 @@ var data = require('./data/output.json');
 var studies = data.studies.clinical_study;
 var solrAPI = require('./lib/solr-api');
 
-var map = [
+var mappings = [
     {
         tag: 'id_info.0.nct_id.0',
         mapping: 'nct_id',
@@ -98,9 +98,10 @@ var map = [
 
 var studiesFlattened = [];
 
-// Flatten each study
+// Flatten each study and add to studiesFlattened
 for (study in studies) {
-    studiesFlattened.push(jsonUtils.flatten(studies[study], map));
+    var flattenedStudy = jsonUtils.flatten(studies[study], mappings);
+    studiesFlattened.push(flattenedStudy);
 }
 
 // Index changes in solr
