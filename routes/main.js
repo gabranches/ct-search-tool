@@ -65,7 +65,7 @@ module.exports = function (app, root) {
         var query = decodeURIComponent(req.params.query);
 
         searchUtils.clinicalTrialSearch(query, function (results, synArr) {
-            res.json(results);
+            res.jsonp(results);
         });
     });
 

@@ -1,0 +1,7 @@
+text_general
+synonymFilterFactory
+
+install_solr_serve.sh
+Taking Solr to Production
+
+service solr restart
