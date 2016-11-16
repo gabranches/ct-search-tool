@@ -39,7 +39,7 @@ module.exports = function(app, root) {
         var nct = decodeURIComponent(req.params.nct);
 
         detailsQuery(nct, function(results) {
-            res.json(results);
+            res.jsonp(results);
         });
     });
 
@@ -74,7 +74,7 @@ module.exports = function(app, root) {
         var query = decodeURIComponent(req.params.query);
         
         searchResultQuery(query, function(results, synArr) {
-            res.json(results);
+            res.jsonp(results);
         });
     });
 
