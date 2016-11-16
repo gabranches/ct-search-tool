@@ -6,3 +6,8 @@ App/css
 App/data/wordnet.db
 
 npm-debug.log
+/bower_components
+/node_modules
+/solr-6.2.1
+/css
+/data
