@@ -158,8 +158,10 @@ var self = module.exports = {
      */
     
     getSynonyms: function(word, callback) {
+        var path = require('path');
+        var appDir = path.dirname(require.main.filename);
         var wordNet = require('wordnet-magic');
-        var wn = wordNet('./data/wordnet.db');
+        var wn = wordNet(appDir + '/data/wordnet.db');
 
         var matches = [word];
 
