@@ -71,7 +71,7 @@ for (i = 0; i < data.length; i++) {
             ],
             primary_outcome: row.StudyObjective,
             secondary_outcome: row.StudyObjective,
-            keyword: typeof row.MeshKeyword === 'string' ? row.MeshKeyword.substring(0, row.MeshKeyword.length-1).split(',') : [],
+            keyword: row.MeshKeyword ? row.MeshKeyword[0].substring(0, row.MeshKeyword[0].length-2).split(',') : [],
             overall_contact: [
                 {
                     last_name: row.ContactName,
