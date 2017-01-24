@@ -105,7 +105,10 @@ module.exports = function(app, root) {
                 secondary_outcome: 'secondary_outcome',
                 keywords: 'keyword',
                 contact: 'overall_contact.0',
-                detailed_description: 'detailed_description.0.textblock.0'
+                detailed_description: 'detailed_description.0.textblock.0',
+                site_disease_group: 'site_disease_group',
+                status: 'status',
+                last_updated: 'lastchanged_date.0'
             }
         )
 
