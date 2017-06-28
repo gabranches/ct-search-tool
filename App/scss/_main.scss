@@ -54,11 +54,17 @@ a {
 .bump20 { margin-top: 20px;}
 
 .banner {
-    padding-bottom: 20px;
-    padding-top: 20px;
+    padding-bottom: 0px;
+    padding-top: 0px;
     background: $light-gray;
     border-bottom: 5px solid $um-orange;
     
+}
+
+.ctsi {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 70px;
 }
 
 .intro {
